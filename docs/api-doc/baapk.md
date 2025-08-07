@@ -6,19 +6,10 @@
 
 你可以通过直接向URL请求来获取（jp，global）
 
-<!-- tabs:start -->
-#### **Vercel节点**
 | 区服 | 请求地址 |
 | - | - |
 | jp | https://api.blockhaity.dpdns.org/baapk/jp |
 | global | https://api.blockhaity.dpdns.org/baapk/global |
-
-#### **CloudFlare节点**
-| 区服 | 请求地址 |
-| - | - |
-| jp | https://cloudflare-api.blockhaity.qzz.io/baapk/jp |
-| global | https://cloudflare-api.blockhaity.qzz.io/baapk/global |
-<!-- tabs:end -->
 
 当然，你可以通过直接获取json数据文件来获取url，此json文件每天0：00和12：00更新
 
