@@ -1,0 +1,13 @@
+[[redirects]]
+form = "/"
+to = "https://api.blockhaity.dpdns.org/docs/"
+
+[[redirects]]
+from = "/apk/global"
+to = "https://d.apkpure.net/b/XAPK/com.nexon.bluearchive?version=latest"
+status = 200
+
+[[redirects]]
+from = "/apk/jp"
+to = "https://d.apkpure.net/b/XAPK/com.YostarJP.BlueArchive?version=latest"
+status = 200
