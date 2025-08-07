@@ -6,13 +6,31 @@
 
 你可以通过直接向URL请求来获取（jp，global）
 
+<!-- tabs:start -->
+#### **Vercel节点**
 | 区服 | 请求地址 |
 | - | - |
 | jp | https://api.blockhaity.dpdns.org/baapk/jp |
 | global | https://api.blockhaity.dpdns.org/baapk/global |
 
+#### **Netlify节点**
+| 区服 | 请求地址 |
+| - | - |
+| jp | https://blockhaity-api.netlify.app/baapk/jp |
+| global | https://blockhaity-api.netlify.app/baapk/global |
+<!-- tabs:end -->
+
 当然，你可以通过直接获取json数据文件来获取url，此json文件每天0：00和12：00更新
 
+<!-- tabs:start -->
+#### **Vercel节点**
 请求地址：https://api.blockhaity.dpdns.org/api/baapk.json
 
 <iframe src="https://api.blockhaity.dpdns.org/api/baapk.json" width="500" height="300"></iframe>
+
+#### **Netlify节点**
+请求地址：https://blockhaity-api.netlify.app/api/baapk.json
+
+<iframe src="https://blockhaity-api.netlify.app/api/baapk.json" width="500" height="300"></iframe>
+<!-- tabs:end -->
+
