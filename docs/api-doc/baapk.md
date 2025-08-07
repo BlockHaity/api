@@ -16,8 +16,8 @@
 #### **CloudFlare节点**
 | 区服 | 请求地址 |
 | - | - |
-| jp | https://cloudflare.api.blockhaity.qzz.io/baapk/jp |
-| global | https://cloudflare.api.blockhaity.qzz.io/baapk/global |
+| jp | https://cloudflare-api.blockhaity.qzz.io/baapk/jp |
+| global | https://cloudflare-api.blockhaity.qzz.io/baapk/global |
 <!-- tabs:end -->
 
 当然，你可以通过直接获取json数据文件来获取url
