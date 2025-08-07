@@ -3,11 +3,11 @@ form = "/"
 to = "/docs/"
 
 [[redirects]]
-from = "/apk/global"
+from = "/baapk/global"
 to = "https://d.apkpure.net/b/XAPK/com.nexon.bluearchive?version=latest"
 status = 200
 
 [[redirects]]
-from = "/apk/jp"
+from = "/baapk/jp"
 to = "https://d.apkpure.net/b/XAPK/com.YostarJP.BlueArchive?version=latest"
 status = 200
