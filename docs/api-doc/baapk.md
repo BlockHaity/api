@@ -20,7 +20,7 @@
 | global | https://cloudflare-api.blockhaity.qzz.io/baapk/global |
 <!-- tabs:end -->
 
-当然，你可以通过直接获取json数据文件来获取url
+当然，你可以通过直接获取json数据文件来获取url，此json文件每天0：00和12：00更新
 
 请求地址：https://api.blockhaity.dpdns.org/api/baapk.json
 
