@@ -1,6 +1,6 @@
 [[redirects]]
 form = "/"
-to = "https://api.blockhaity.dpdns.org/docs/"
+to = "/docs/"
 
 [[redirects]]
 from = "/apk/global"
