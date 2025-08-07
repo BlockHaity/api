@@ -8,15 +8,15 @@
 
 <!-- tabs:start -->
 #### **Vercel节点**
-| 区服 | 请求地址 |
-| - | - |
-| jp | https://api.blockhaity.dpdns.org/baapk/jp |
+| 区服   | 请求地址                                      |
+| ------ | --------------------------------------------- |
+| jp     | https://api.blockhaity.dpdns.org/baapk/jp     |
 | global | https://api.blockhaity.dpdns.org/baapk/global |
 
 #### **Netlify节点**
-| 区服 | 请求地址 |
-| - | - |
-| jp | https://blockhaity-api.netlify.app/baapk/jp |
+| 区服   | 请求地址                                        |
+| ------ | ----------------------------------------------- |
+| jp     | https://blockhaity-api.netlify.app/baapk/jp     |
 | global | https://blockhaity-api.netlify.app/baapk/global |
 <!-- tabs:end -->
 
