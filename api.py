@@ -128,7 +128,7 @@ if __name__ == "__main__":
     baapk["jp"] = get_final_url(url)
     # cn
     html = urlopen("https://mumu.163.com/games/22367.html").read().decode("utf-8")
-    baapk["cn"] = re.findall(r'https://pkg.bluearchive-cn.com[^\s\'"]+?\/com.RoamingStar.BlueArchive.apk', html)[0]
+    baapk["cn"] = re.findall(r'https://mumu-apk.fp.ps.netease.com/file[^\s\'"]+?.apk', html)[0]
     # cn_bili
     baapk["cn_bili"] = json.loads(urlopen("https://line1-h5-pc-api.biligame.com/game/detail/gameinfo?game_base_id=109864").read().decode("utf-8")
                                   )['data']['android_download_link']
