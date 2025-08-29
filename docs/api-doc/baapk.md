@@ -10,8 +10,8 @@
 #### **Vercel节点**
 | 区服   | 请求地址                                      |
 | ------ | --------------------------------------------- |
-| jp     | https://api.blockhaity.dpdns.org/baapk/jp     |
-| global | https://api.blockhaity.dpdns.org/baapk/global |
+| jp     | https://api.blockhaity.qzz.io/baapk/jp     |
+| global | https://api.blockhaity.qzz.io/baapk/global |
 
 #### **Netlify节点**
 | 区服   | 请求地址                                        |
@@ -24,9 +24,9 @@
 
 <!-- tabs:start -->
 #### **Vercel节点**
-请求地址：https://api.blockhaity.dpdns.org/api/baapk.json
+请求地址：https://api.blockhaity.qzz.io/api/baapk.json
 
-<iframe src="https://api.blockhaity.dpdns.org/api/baapk.json" width="500" height="300"></iframe>
+<iframe src="https://api.blockhaity.qzz.io/api/baapk.json" width="500" height="300"></iframe>
 
 #### **Netlify节点**
 请求地址：https://blockhaity-api.netlify.app/api/baapk.json
