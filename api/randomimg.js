@@ -1,13 +1,11 @@
-// 导入所需模块
 import { promises as fs } from 'fs';
 import path from 'path';
 
 // 定义分类与JSON文件的映射
 const categoryMap = {
-  'all': '/img/all.json',
-  'miku': '/img/miku.json',
-  'bluearchive': '/img/bluearchive.json'
-  // 可以继续添加更多分类
+  'all': 'public/img/all.json',
+  'miku': 'public/img/miku.json',
+  'bluearchive': 'public/img/bluearchive.json'
 };
 
 export default async function handler(req, res) {
@@ -24,7 +22,7 @@ export default async function handler(req, res) {
   
   try {
     // 读取对应分类的JSON文件
-    const dataPath = path.join(process.cwd(), 'public', categoryMap[category]);
+    const dataPath = path.join(process.cwd(), categoryMap[category]);
     const jsonData = await fs.readFile(dataPath, 'utf8');
     const images = JSON.parse(jsonData);
     
