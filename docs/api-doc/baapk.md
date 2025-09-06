@@ -20,7 +20,7 @@
 | global | https://blockhaity-api.netlify.app/baapk/global |
 
 #### **Vercel节点**
-b| 区服   | 请求地址                                      |
+| 区服   | 请求地址                                      |
 | ------ | --------------------------------------------- |
 | jp     | https://api-vercel.blockhaity.dpdns.org/baapk/jp     |
 | global | https://api-vercel.blockhaity.dpdns.org/baapk/global |
