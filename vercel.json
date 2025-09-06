@@ -8,6 +8,10 @@
     {
       "source": "/baapk/jp",
       "destination": "https://d.apkpure.net/b/XAPK/com.YostarJP.BlueArchive?version=latest"
+    },
+    {
+      "source": "/images/:path*",
+      "destination": "/images/:path*"
     }
   ]
 }
