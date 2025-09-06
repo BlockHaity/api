@@ -1,5 +1,29 @@
 {
   "version": 2,
+  "routes": [
+    {
+      "src": "/randomimg",
+      "dest": "/api/randomimg.js",
+      "methods": [
+        "GET"
+      ]
+    }
+  ],
+  "headers": [
+    {
+      "source": "/randomimg",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "s-maxage=60, stale-while-revalidate"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        }
+      ]
+    }
+  ],
   "rewrites": [
     {
       "source": "/baapk/global",
