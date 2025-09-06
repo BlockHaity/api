@@ -15,5 +15,5 @@ status = 200
 
 [[redirects]]
 from = "/images/*"
-to = "https://api-cloudflare.com/images/*"
+to = "https://api-cloudflare.com/images/:splat"
 status = 200
