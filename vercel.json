@@ -11,7 +11,7 @@
     },
     {
       "source": "/images",
-      "destination": "/images"
+      "destination": "https://api-cloudflare.blockhaity.qzz.io/images"
     }
   ]
 }
