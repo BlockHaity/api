@@ -4,9 +4,7 @@
     {
       "src": "/randomimg",
       "dest": "/api/randomimg.js",
-      "methods": [
-        "GET"
-      ]
+      "methods": ["GET"]
     }
   ],
   "headers": [
