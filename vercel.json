@@ -10,8 +10,8 @@
       "destination": "https://d.apkpure.net/b/XAPK/com.YostarJP.BlueArchive?version=latest"
     },
     {
-      "source": "/images",
-      "destination": "https://api-cloudflare.blockhaity.qzz.io/images"
+      "source": "/images/:path*",
+      "destination": "https://api-cloudflare.blockhaity.qzz.io/images/:path*"
     }
   ]
 }
