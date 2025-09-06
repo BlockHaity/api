@@ -1,23 +1,5 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "api/randomimg.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/randomimg",
-      "dest": "/api/randomimg.js",
-      "methods": ["GET"]
-    },
-    {
-      "src": "/img/(.*)",
-      "dest": "/api/randomimg.js",
-      "methods": ["GET"]
-    }
-  ],
   "headers": [
     {
       "source": "/randomimg",
@@ -41,6 +23,10 @@
     {
       "source": "/baapk/jp",
       "destination": "https://d.apkpure.net/b/XAPK/com.YostarJP.BlueArchive?version=latest"
+    },
+    {
+      "source": "/randomimg",
+      "destination": "/api/randomimg.js"
     }
   ]
 }
