@@ -1,8 +1,19 @@
 {
   "version": 2,
+  "builds": [
+    {
+      "src": "api/randomimg.js",
+      "use": "@vercel/node"
+    }
+  ],
   "routes": [
     {
       "src": "/randomimg",
+      "dest": "/api/randomimg.js",
+      "methods": ["GET"]
+    },
+    {
+      "src": "/img/(.*)",
       "dest": "/api/randomimg.js",
       "methods": ["GET"]
     }
