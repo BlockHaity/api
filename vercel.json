@@ -1,20 +1,5 @@
 {
   "version": 2,
-  "headers": [
-    {
-      "source": "/randomimg",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "s-maxage=60, stale-while-revalidate"
-        },
-        {
-          "key": "Access-Control-Allow-Origin",
-          "value": "*"
-        }
-      ]
-    }
-  ],
   "rewrites": [
     {
       "source": "/baapk/global",
@@ -23,10 +8,6 @@
     {
       "source": "/baapk/jp",
       "destination": "https://d.apkpure.net/b/XAPK/com.YostarJP.BlueArchive?version=latest"
-    },
-    {
-      "source": "/randomimg",
-      "destination": "/api/randomimg.js"
     }
   ]
 }
