@@ -1,3 +1,4 @@
-* [主页](/)
-* API文档
-  * [baapk](/api-doc/baapk)
+- [主页](/)
+- API文档
+  - [baapk](/api-doc/baapk)
+  - [randomimg](/api-doc/randomimg)
