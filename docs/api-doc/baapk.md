@@ -30,17 +30,17 @@
 
 <!-- tabs:start -->
 #### **CloudFlare-Vercel节点**
-请求地址：https://api.blockhaity.qzz.io/api/baapk.json
+请求地址：https://api.blockhaity.qzz.io/api/baapk.json 或 https://api.blockhaity.qzz.io/baapk.json
 
 <iframe src="https://api.blockhaity.qzz.io/api/baapk.json" width="500" height="300"></iframe>
 
 #### **Netlify节点**
-请求地址：https://blockhaity-api.netlify.app/api/baapk.json
+请求地址：https://blockhaity-api.netlify.app/api/baapk.json 或 https://blockhaity-api.netlify.app/baapk.json
 
 <iframe src="https://blockhaity-api.netlify.app/api/baapk.json" width="500" height="300"></iframe>
 
 #### **Vercel节点**
-请求地址：https://api-vercel.blockhaity.dpdns.org/api/baapk.json
+请求地址：https://api-vercel.blockhaity.dpdns.org/api/baapk.json 或 https://api-vercel.blockhaity.dpdns.org/baapk.json
 
 <iframe src="https://api-vercel.blockhaity.dpdns.org/api/baapk.json" width="500" height="300"></iframe>
 <!-- tabs:end -->
