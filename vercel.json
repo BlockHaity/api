@@ -2,6 +2,10 @@
   "version": 2,
   "rewrites": [
     {
+      "source": "/api/baapk.json",
+      "destination": "/baapk.json"
+    },
+    {
       "source": "/baapk/global",
       "destination": "https://d.apkpure.net/b/XAPK/com.nexon.bluearchive?version=latest"
     },
@@ -10,7 +14,7 @@
       "destination": "https://d.apkpure.net/b/XAPK/com.YostarJP.BlueArchive?version=latest"
     },
     {
-      "source":"/images",
+      "source": "/images",
       "destination": "https://api-cloudflare.blockhaity.qzz.io/images"
     },
     {
