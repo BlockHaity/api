@@ -116,8 +116,7 @@ def get_final_url(url, timeout=10, retry_count=3):
 
 if __name__ == "__main__":
     # baapk
-    print("开始生成api/baapk.json")
-    os.mkdir("api")
+    print("开始生成baapk.json")
     baapk = {}
     baapk["date"] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
     # global
@@ -135,5 +134,5 @@ if __name__ == "__main__":
     baapk["cn_bili"] = json.loads(urlopen("https://line1-h5-pc-api.biligame.com/game/detail/gameinfo?game_base_id=109864").read().decode("utf-8")
                                   )['data']['android_download_link']
     # 保存
-    print("保存api/baapk.json")
-    json.dump(baapk, open("api/baapk.json", "w", encoding="utf-8"), ensure_ascii=False, indent=4)
+    print("保存baapk.json")
+    json.dump(baapk, open("baapk.json", "w", encoding="utf-8"), ensure_ascii=False, indent=4)
