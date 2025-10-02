@@ -15,11 +15,11 @@
     },
     {
       "source": "/images",
-      "destination": "https://api-cloudflare.blockhaity.qzz.io/images"
+      "destination": "/api/random-image"
     },
     {
       "source": "/images/:path*",
-      "destination": "https://api-cloudflare.blockhaity.qzz.io/images/:path*"
+      "destination": "/api/random-image/:path*"
     }
   ]
 }
