@@ -1,5 +1,10 @@
 {
   "version": 2,
+  "functions": {
+    "api/random-image.js": {
+      "maxDuration": 30
+    }
+  },
   "rewrites": [
     {
       "source": "/api/baapk.json",
