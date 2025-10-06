@@ -1,3 +1,7 @@
+export const config = {
+    path: ["/images","/images/*"]
+};
+
 const CATEGORY_CONFIG = {
     'bluearchive': 'bluearchive.json',
     'miku': 'miku.json',
@@ -180,9 +184,4 @@ export default async (request, context) => {
     }
 
     return handleImageRequest(request);
-};
-
-// Netlify Edge Functions 配置 - 修改为只在 /images 路径下运行
-export const config = {
-    path: ["/images","/images/*"]
 };
