@@ -26,7 +26,7 @@
 | global | https://api-vercel.blockhaity.dpdns.org/baapk/global |
 <!-- tabs:end -->
 
-当然，你可以通过直接获取json数据文件来获取url，此json文件每天0：00和12：00更新
+当然，你可以通过直接获取json数据文件来获取url，此json文件每隔2小时更新
 
 <!-- tabs:start -->
 #### **CloudFlare-Vercel节点**
