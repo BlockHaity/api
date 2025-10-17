@@ -27,8 +27,8 @@
       "destination": "/api/random-image/:path*"
     },
     {
-      "source":"/ghassest/:path*",
-      "destination": "https://release-assets.githubusercontent.com/github-production-release-asset/:path*"
+      "source":"/ghassest/:path*/:path*",
+      "destination": "https://release-assets.githubusercontent.com/github-production-release-asset/:path*/:path*"
     }
   ]
 }
