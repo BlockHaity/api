@@ -65,7 +65,10 @@ export default async function handler(request) {
     
     // 获取选定的asset
     const selectedAsset = firstRelease.assets[assetIndex];
-    const currentDomain = new URL(request.url).origin;
+    let currentDomain = new URL(request.url).origin;
+    if (currentDomain === "api.blockhaity.dpdns.org") {
+        currentDomain = "api.blockhaity.qzz.io";
+    }
     const downloadUrl = currentDomain + "/gh-download?url=" + selectedAsset.browser_download_url;
     
     // 如果请求JSON格式，返回JSON信息
