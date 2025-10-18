@@ -28,8 +28,12 @@
       "destination": "/api/random-image/:path*"
     },
     {
-      "source":"/gh-download",
+      "source": "/gh-download",
       "destination": "/api/gh-download"
+    },
+    {
+      "source": "getbaah",
+      "destination": "/api/getbaah"
     }
   ]
 }
