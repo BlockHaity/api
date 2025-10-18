@@ -147,4 +147,4 @@ if __name__ == "__main__":
     for filename, url in urls.items():
         request = Request(url, headers=Headers)
         data = urlopen(request).read().decode("utf-8")
-        json.dump(json.loads(data)[0], open("cache/"+filename, "w", encoding="utf-8"), ensure_ascii=False, indent=4)
+        json.dump(json.loads(data), open("cache/"+filename, "w", encoding="utf-8"), ensure_ascii=False, indent=4)
