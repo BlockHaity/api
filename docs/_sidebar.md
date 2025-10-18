@@ -2,3 +2,5 @@
 - API文档
   - [baapk](/api-doc/baapk)
   - [randomimg](/api-doc/randomimg)
+  - [gh-download](/api-doc/gh-download)
+  - [getbaah](/api-doc/getbaah)
