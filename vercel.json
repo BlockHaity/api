@@ -32,7 +32,7 @@
       "destination": "/api/gh-download"
     },
     {
-      "source": "getbaah",
+      "source": "/getbaah",
       "destination": "/api/getbaah"
     }
   ]
