@@ -2,26 +2,35 @@ export const config = {
   runtime: 'edge',
 };
 
-// api/github-release.js
-export default async function handler(req, res) {
+export default async function handler(request) {
   try {
+    // 获取 URL 和查询参数
+    const url = new URL(request.url);
     // 获取target参数，默认为0
-    const { target = 0 } = req.query;
+    const target = url.searchParams.get('target') || '0';
+    // 检查是否需要JSON格式返回
+    const jsonFormat = url.searchParams.get('json') === 'true';
 
     // 从GitHub API获取发布信息，如果失败则使用备用API
     let releases;
     try {
-        const response = await fetch('https://api.github.com/repos/BlueArchiveArisHelper/BAAH/releases');
-        releases = await response.json();
+      const response = await fetch('https://api.github.com/repos/BlueArchiveArisHelper/BAAH/releases');
+      releases = await response.json();
     } catch (error) {
-        console.log('GitHub API访问失败，切换到备用API');
-        const backupResponse = await fetch('https://api-vercel.blockhaity.dpdns.org/cache/baah.json');
-        releases = await backupResponse.json();
+      console.log('GitHub API访问失败，切换到备用API');
+      const backupResponse = await fetch('https://api-vercel.blockhaity.dpdns.org/cache/baah.json');
+      releases = await backupResponse.json();
     }
     
     // 检查是否有发布信息
     if (!releases || releases.length === 0) {
-      return res.status(404).json({ error: 'No releases found' });
+      if (jsonFormat) {
+        return new Response(JSON.stringify({ error: 'No releases found' }), {
+          status: 404,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      }
+      return new Response('No releases found', { status: 404 });
     }
     
     // 获取第一个发布
@@ -29,28 +38,66 @@ export default async function handler(req, res) {
     
     // 检查是否有assets
     if (!firstRelease.assets || firstRelease.assets.length === 0) {
-      return res.status(404).json({ error: 'No assets found in the latest release' });
+      if (jsonFormat) {
+        return new Response(JSON.stringify({ error: 'No assets found in the latest release' }), {
+          status: 404,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      }
+      return new Response('No assets found in the latest release', { status: 404 });
     }
     
     // 验证target参数是否有效
     const assetIndex = parseInt(target);
     if (isNaN(assetIndex) || assetIndex < 0 || assetIndex >= firstRelease.assets.length) {
-      return res.status(400).json({ 
-        error: `Invalid target parameter. Please use a value between 0 and ${firstRelease.assets.length - 1}` 
+      if (jsonFormat) {
+        return new Response(JSON.stringify({ 
+          error: `Invalid target parameter. Please use a value between 0 and ${firstRelease.assets.length - 1}` 
+        }), {
+          status: 400,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      }
+      return new Response(`Invalid target parameter. Please use a value between 0 and ${firstRelease.assets.length - 1}`, { 
+        status: 400 
       });
     }
     
-    // 返回指定asset的下载链接
+    // 获取选定的asset
     const selectedAsset = firstRelease.assets[assetIndex];
-    res.status(200).json({
-      name: selectedAsset.name,
-      downloadUrl: "https://api-vercel.blockhaity.dpdns.org/gh-download?url="+selectedAsset.browser_download_url,
-      size: selectedAsset.size,
-      contentType: selectedAsset.content_type
+    const downloadUrl = "https://api-vercel.blockhaity.dpdns.org/gh-download?url=" + selectedAsset.browser_download_url;
+    
+    // 如果请求JSON格式，返回JSON信息
+    if (jsonFormat) {
+      return new Response(JSON.stringify({
+        name: selectedAsset.name,
+        downloadUrl: downloadUrl,
+        size: selectedAsset.size,
+        contentType: selectedAsset.content_type,
+        redirectUrl: downloadUrl
+      }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+    
+    // 否则直接重定向到下载链接
+    return new Response(null, {
+      status: 302,
+      headers: {
+        'Location': downloadUrl,
+        'Cache-Control': 'no-cache'
+      }
     });
     
   } catch (error) {
     console.error('Error fetching release data:', error);
-    res.status(500).json({ error: 'Failed to fetch release data' });
+    if (jsonFormat) {
+      return new Response(JSON.stringify({ error: 'Failed to fetch release data' }), {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+    return new Response('Failed to fetch release data', { status: 500 });
   }
 }
