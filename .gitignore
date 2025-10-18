@@ -4,5 +4,3 @@
 .netlify
 .vscode
 init.sh
-
-node_modules
