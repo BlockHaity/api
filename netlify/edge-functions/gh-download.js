@@ -21,7 +21,6 @@ export default async (request, context) => {
     const allowedDomains = [
       'github.com',
       'raw.githubusercontent.com',
-      'api.github.com',
       'gist.github.com',
       'objects.githubusercontent.com',
       'archive.org',
