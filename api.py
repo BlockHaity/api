@@ -1,3 +1,4 @@
+from email import header
 from urllib.request import Request, urlopen
 from urllib.error import URLError, HTTPError
 from urllib.parse import urlparse
@@ -7,6 +8,7 @@ import time
 import os
 import re
 import json
+from wsgiref import headers
 
 def get_final_url(url, timeout=10, retry_count=3):
     """
@@ -136,3 +138,13 @@ if __name__ == "__main__":
     # 保存
     print("保存baapk.json")
     json.dump(baapk, open("baapk.json", "w", encoding="utf-8"), ensure_ascii=False, indent=4)
+    
+    print("开始生成cache")
+    Headers = {
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+                }
+    urls = {"baah.json": "https://api.github.com/repos/BlueArchiveArisHelper/BAAH/releases"}
+    for filename, url in urls.items():
+        request = Request(url, headers=Headers)
+        data = urlopen(request).read().decode("utf-8")
+        json.dump(json.loads(data)[0], open("cache/"+filename, "w", encoding="utf-8"), ensure_ascii=False, indent=4)
