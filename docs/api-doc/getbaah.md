@@ -21,7 +21,7 @@ https://api.blockhaity.qzz.io/getbaah
 
 文件相关数据(指定?json=true获取)
 
-![请求内容](https://api.blockhaity.qzz.io/getbaah?json=true)
+<iframe src="https://api.blockhaity.qzz.io/api/baapk.json" width="500" height="300">https://api.blockhaity.qzz.io/getbaah?json=true</iframe>
 
 #### **Cloudflare节点**
 
@@ -31,7 +31,7 @@ https://api-cloudflare.blockhaity.qzz.io/getbaah
 
 文件相关数据(指定?json=true获取)
 
-![请求内容](https://api-cloudflare.blockhaity.qzz.io/getbaah?json=true)
+<iframe src="https://api.blockhaity.qzz.io/api/baapk.json" width="500" height="300">https://api-cloudflare.blockhaity.qzz.io/getbaah?json=true</iframe>
 
 #### **Vercel节点**
 
@@ -41,7 +41,7 @@ https://api-vercel.blockhaity.dpdns.org/getbaah
 
 文件相关数据(指定?json=true获取)
 
-![请求内容](https://api-vercel.blockhaity.dpdns.org/getbaah?json=true)
+<iframe src="https://api.blockhaity.qzz.io/api/baapk.json" width="500" height="300">https://api-vercel.blockhaity.dpdns.org/getbaah?json=true</iframe>
 
 #### **Netlify节点**
 
@@ -51,7 +51,7 @@ https://blockhaity-api.netlify.app/getbaah
 
 文件相关数据(指定?json=true获取)
 
-![请求内容](https://blockhaity-api.netlify.app/getbaah?json=true)
+<iframe src="https://api.blockhaity.qzz.io/api/baapk.json" width="500" height="300">https://blockhaity-api.netlify.app/getbaah?json=true</iframe>
 
 <!-- tabs:end -->
 
