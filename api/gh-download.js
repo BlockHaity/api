@@ -23,7 +23,6 @@ export default async function handler(req) {
       'raw.githubusercontent.com',
       'gist.github.com',
       'objects.githubusercontent.com',
-      'archive.org',
       'githubassets.com'
     ];
     
