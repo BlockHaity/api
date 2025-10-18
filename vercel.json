@@ -28,19 +28,8 @@
       "destination": "/api/random-image/:path*"
     },
     {
-      "source": "/ghassests/:path*",
+      "source":"/ghassests/:path*",
       "destination": "https://release-assets.githubusercontent.com/github-production-release-asset/:path*"
-    }
-  ],
-  "headers": [
-    {
-      "source": "/ghassests/:path*",
-      "headers": [
-        {
-          "key": "User-Agent",
-          "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
-        }
-      ]
     }
   ]
 }
