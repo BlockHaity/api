@@ -28,8 +28,8 @@
       "destination": "/api/random-image/:path*"
     },
     {
-      "source":"/ghassests/:path*",
-      "destination": "https://release-assets.githubusercontent.com/github-production-release-asset/:path*"
+      "source":"/gh-download",
+      "destination": "/api/gh-download"
     }
   ]
 }
