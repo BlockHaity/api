@@ -49,33 +49,10 @@ export default async function handler(req) {
     // 添加自定义 User-Agent
     headers.set('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36');
 
-    // 获取文件信息
-    let fileInfo = null;
-    try {
-      const headResponse = await fetch(fileUrl, { 
-        method: 'HEAD',
-        headers
-      });
-      if (headResponse.ok) {
-        const contentLength = headResponse.headers.get('content-length');
-        const acceptRanges = headResponse.headers.get('accept-ranges');
-        const contentType = headResponse.headers.get('content-type');
-        const lastModified = headResponse.headers.get('last-modified');
-        
-        fileInfo = {
-          size: contentLength,
-          acceptRanges,
-          contentType,
-          lastModified
-        };
-      }
-    } catch (error) {
-      console.error('Failed to get file info:', error);
-    }
-
     // 创建 fetch 请求
     const response = await fetch(fileUrl, {
       headers,
+      // 保持与原始请求相同的 method
       method: req.method,
     });
 
@@ -88,15 +65,6 @@ export default async function handler(req) {
 
     // 创建新的响应头
     const responseHeaders = new Headers();
-    
-    // 添加文件信息头
-    if (fileInfo) {
-      responseHeaders.set('X-File-Size', fileInfo.size || '0');
-      responseHeaders.set('X-File-Last-Modified', fileInfo.lastModified || '');
-      responseHeaders.set('X-File-Type', fileInfo.contentType || '');
-      responseHeaders.set('X-Accept-Ranges', fileInfo.acceptRanges || 'none');
-    }
-
     // 复制重要的响应头
     const responseAllowedHeaders = [
       'content-type',
@@ -117,10 +85,7 @@ export default async function handler(req) {
     // 添加 CORS 头
     responseHeaders.set('Access-Control-Allow-Origin', '*');
     responseHeaders.set('Access-Control-Allow-Methods', 'GET');
-    responseHeaders.set('Access-Control-Allow-Headers', 'Range, X-Requested-With');
-    responseHeaders.set('Access-Control-Expose-Headers', 
-      'Content-Length, Content-Range, X-File-Size, X-File-Last-Modified, X-File-Type, X-Accept-Ranges'
-    );
+    responseHeaders.set('Access-Control-Allow-Headers', 'Range');
 
     // 返回响应
     return new Response(response.body, {
