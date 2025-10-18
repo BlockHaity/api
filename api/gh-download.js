@@ -17,8 +17,23 @@ export default async function handler(req) {
       return new Response('Missing file URL parameter', { status: 400 });
     }
 
-    // 验证是否是 GitHub URL
-    if (!fileUrl.startsWith('https://github.com/') && !fileUrl.startsWith('https://raw.githubusercontent.com/')) {
+    // 验证是否是 GitHub 相关 URL
+    const allowedDomains = [
+      'github.com',
+      'raw.githubusercontent.com',
+      'api.github.com',
+      'gist.github.com',
+      'objects.githubusercontent.com',
+      'archive.org',
+      'githubassets.com'
+    ];
+    
+    const isValidDomain = allowedDomains.some(domain => 
+      fileUrl.startsWith(`https://${domain}/`) || 
+      fileUrl.startsWith(`http://${domain}/`)
+    );
+    
+    if (!isValidDomain) {
       return new Response('Invalid GitHub URL', { status: 400 });
     }
 
