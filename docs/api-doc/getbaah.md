@@ -2,6 +2,14 @@
 
 获取最新的[BAAH](https://github.com/BlueArchiveArisHelper/BAAH/)发行版，即程序本体
 
+[从Cloudflare节点下载(推荐，最快)](https://api-cloudflare.blockhaity.qzz.io/getbaah)
+
+[从Netlify节点下载(推荐)](https://blockhaity-api.netlify.app/getbaah)
+
+[从Cloudflare-Vercel节点下载(备用)](https://api.blockhaity.qzz.io/getbaah)
+
+[从Vercel节点下载(备用)](https://api-vercel.blockhaity.dpdns.org/getbaah)
+
 ## 使用方法
 
 <!-- tabs:start -->
