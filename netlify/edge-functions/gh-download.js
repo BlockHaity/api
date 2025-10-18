@@ -1,5 +1,5 @@
 export const config = {
-    path: ["/api/gh-download"]
+    path: "/gh-download"
 };
 
 export default async (request, context) => {
