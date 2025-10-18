@@ -65,7 +65,8 @@ export default async function handler(request) {
     
     // 获取选定的asset
     const selectedAsset = firstRelease.assets[assetIndex];
-    const downloadUrl = "https://api-vercel.blockhaity.dpdns.org/gh-download?url=" + selectedAsset.browser_download_url;
+    const currentDomain = new URL(request.url).origin;
+    const downloadUrl = currentDomain + "/gh-download?url=" + selectedAsset.browser_download_url;
     
     // 如果请求JSON格式，返回JSON信息
     if (jsonFormat) {
