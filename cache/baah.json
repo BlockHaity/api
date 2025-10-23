@@ -68,7 +68,7 @@
                 "state": "uploaded",
                 "size": 155188816,
                 "digest": "sha256:e56955da26dda83453d5ad49fe78bfd38cb69de2f34b90bb05c6f22b16c88ecd",
-                "download_count": 432,
+                "download_count": 434,
                 "created_at": "2025-10-07T06:37:05Z",
                 "updated_at": "2025-10-07T06:37:37Z",
                 "browser_download_url": "https://github.com/BlueArchiveArisHelper/BAAH/releases/download/BAAH1.10.16/BAAH1.10.16.zip"
@@ -310,7 +310,7 @@
                 "state": "uploaded",
                 "size": 155172649,
                 "digest": "sha256:4873f886deb77dafafb84974eaf7e1b130cd1aed0cecf99d9eb5f4d551dd10a0",
-                "download_count": 286,
+                "download_count": 287,
                 "created_at": "2025-09-22T13:06:24Z",
                 "updated_at": "2025-09-22T13:06:53Z",
                 "browser_download_url": "https://github.com/BlueArchiveArisHelper/BAAH/releases/download/BAAH1.10.14/BAAH1.10.14.zip"
@@ -1055,7 +1055,7 @@
                 "state": "uploaded",
                 "size": 152586061,
                 "digest": "sha256:86e2213713566f8989308af8647c8621da2eaf077b447f23a374c5c5f2855c79",
-                "download_count": 705,
+                "download_count": 706,
                 "created_at": "2025-06-16T06:09:03Z",
                 "updated_at": "2025-06-16T06:13:01Z",
                 "browser_download_url": "https://github.com/BlueArchiveArisHelper/BAAH/releases/download/BAAH1.10.5/BAAH1.10.5.zip"
