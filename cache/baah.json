@@ -68,7 +68,7 @@
                 "state": "uploaded",
                 "size": 155188816,
                 "digest": "sha256:e56955da26dda83453d5ad49fe78bfd38cb69de2f34b90bb05c6f22b16c88ecd",
-                "download_count": 554,
+                "download_count": 555,
                 "created_at": "2025-10-07T06:37:05Z",
                 "updated_at": "2025-10-07T06:37:37Z",
                 "browser_download_url": "https://github.com/BlueArchiveArisHelper/BAAH/releases/download/BAAH1.10.16/BAAH1.10.16.zip"
@@ -104,7 +104,7 @@
                 "state": "uploaded",
                 "size": 20193073,
                 "digest": "sha256:d61463e144097c6521020e86e8b316f9b1588e50f8e07ba5667f8cc77da64a9b",
-                "download_count": 193,
+                "download_count": 194,
                 "created_at": "2025-10-07T06:37:36Z",
                 "updated_at": "2025-10-07T06:37:43Z",
                 "browser_download_url": "https://github.com/BlueArchiveArisHelper/BAAH/releases/download/BAAH1.10.16/BAAH1.10.16_update.zip"
@@ -231,7 +231,7 @@
                 "state": "uploaded",
                 "size": 20192200,
                 "digest": "sha256:ae4ba26a78be72fc5dcb23d0c4cade1c7065507a296e9df6b1d56363fa9f9800",
-                "download_count": 10,
+                "download_count": 11,
                 "created_at": "2025-10-06T15:00:54Z",
                 "updated_at": "2025-10-06T15:01:02Z",
                 "browser_download_url": "https://github.com/BlueArchiveArisHelper/BAAH/releases/download/BAAH1.10.15/BAAH1.10.15_update.zip"
@@ -540,7 +540,7 @@
                 "state": "uploaded",
                 "size": 155172124,
                 "digest": "sha256:adf1c1113e072c7829b4f83209824a4fb4a632e3256632a631362de646fb2b7e",
-                "download_count": 486,
+                "download_count": 487,
                 "created_at": "2025-08-29T05:06:51Z",
                 "updated_at": "2025-08-29T05:10:02Z",
                 "browser_download_url": "https://github.com/BlueArchiveArisHelper/BAAH/releases/download/BAAH1.10.12/BAAH1.10.12.zip"
