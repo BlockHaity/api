@@ -1091,7 +1091,7 @@
                 "state": "uploaded",
                 "size": 20074775,
                 "digest": "sha256:22eda3b778dc5687e8af78681e7c95f0ecdd887f36ac9545b2f1b6e80e70693b",
-                "download_count": 421,
+                "download_count": 422,
                 "created_at": "2025-06-16T06:13:01Z",
                 "updated_at": "2025-06-16T06:13:08Z",
                 "browser_download_url": "https://github.com/BlueArchiveArisHelper/BAAH/releases/download/BAAH1.10.5/BAAH1.10.5_update.zip"
