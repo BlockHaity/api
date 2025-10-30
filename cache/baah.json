@@ -3168,7 +3168,7 @@
                 "state": "uploaded",
                 "size": 21085564,
                 "digest": null,
-                "download_count": 68,
+                "download_count": 69,
                 "created_at": "2025-01-10T04:17:01Z",
                 "updated_at": "2025-01-10T04:17:08Z",
                 "browser_download_url": "https://github.com/BlueArchiveArisHelper/BAAH/releases/download/BAAH1.8.10/BAAH1.8.10_update.zip"
