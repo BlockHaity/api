@@ -34,7 +34,7 @@
         "immutable": false,
         "prerelease": false,
         "created_at": "2025-12-18T14:25:40Z",
-        "updated_at": "2025-12-18T14:30:46Z",
+        "updated_at": "2025-12-20T14:29:09Z",
         "published_at": "2025-12-18T14:30:46Z",
         "assets": [
             {
@@ -68,7 +68,7 @@
                 "state": "uploaded",
                 "size": 169342234,
                 "digest": "sha256:fbeb70bdc3d5250fe83dfbe8d22dbccf5dadacfd9166ef551e112858a0530b08",
-                "download_count": 231,
+                "download_count": 236,
                 "created_at": "2025-12-18T14:30:39Z",
                 "updated_at": "2025-12-18T14:30:45Z",
                 "browser_download_url": "https://github.com/BlueArchiveArisHelper/BAAH/releases/download/BAAH2.0.4/BAAH2.0.4.zip"
@@ -104,7 +104,7 @@
                 "state": "uploaded",
                 "size": 15612040,
                 "digest": "sha256:f624b764b40c8007e8b75f443f702c725a7cda476569f569e08e95d550243af8",
-                "download_count": 47,
+                "download_count": 48,
                 "created_at": "2025-12-18T14:30:39Z",
                 "updated_at": "2025-12-18T14:30:40Z",
                 "browser_download_url": "https://github.com/BlueArchiveArisHelper/BAAH/releases/download/BAAH2.0.4/BAAH2.0.4_update.zip"
@@ -112,7 +112,7 @@
         ],
         "tarball_url": "https://api.github.com/repos/BlueArchiveArisHelper/BAAH/tarball/BAAH2.0.4",
         "zipball_url": "https://api.github.com/repos/BlueArchiveArisHelper/BAAH/zipball/BAAH2.0.4",
-        "body": "\r\n>> 2.0 版本需要重新下载，无法由1.x版本升级 | Must download full BAAH 2.0.0 <<\r\n\r\n>> 下载Download: https://baah.sanmusen.top/zh_CN/download.html <<\r\n\r\n>> 迁移配置文件: 将2.0.0版本解压至旧版本目录覆盖 或 手动迁移旧版本的 BAAH_CONFIGS 和 DATA/CONFIGS 文件夹 <<\r\n\r\n>> Keep configs: Retract zip into old version folder or Move files in BAAH_CONFIGS and DATA/CONFIGS folder <<\r\n\r\n# Update\r\n\r\n支持 Steam 上的碧蓝档案\r\n\r\nSupport Steam Blue Archive\r\n\r\n\r\n升级 ui 库版本\r\n\r\nUpgrade ui library version\r\n\r\n# Fix\r\n\r\n修复国际服推图识别队伍号问题\r\n\r\nFix explore team ocr in Global server\r\n\r\n\r\n"
+        "body": ">> 2.0 版本需要重新下载，无法由1.x版本升级 | Must download full BAAH 2.0.0 <<\r\n\r\n>> 下载Download: https://baah.sanmusen.top/zh_CN/download.html <<\r\n\r\n>> 迁移配置文件: 将2.0.0版本解压至旧版本目录覆盖 或 手动迁移旧版本的 BAAH_CONFIGS 和 DATA/CONFIGS 文件夹 <<\r\n\r\n>> Keep configs: Retract zip into old version folder or Move files in BAAH_CONFIGS and DATA/CONFIGS folder <<\r\n\r\n# Update\r\n\r\n支持 Steam 上的碧蓝档案（关闭按键提示）\r\n\r\nSupport Steam Blue Archive\r\n\r\n\r\n升级 ui 库版本\r\n\r\nUpgrade ui library version\r\n\r\n# Fix\r\n\r\n修复国际服推图识别队伍号问题\r\n\r\nFix explore team ocr in Global server\r\n\r\n\r\n"
     },
     {
         "url": "https://api.github.com/repos/BlueArchiveArisHelper/BAAH/releases/271341579",
