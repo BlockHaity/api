@@ -7,7 +7,7 @@ export default async function handler(request) {
     // 获取 URL 和查询参数
     const url = new URL(request.url);
     // 获取target参数，默认为0
-    const target = url.searchParams.get('target') || '1';
+    const target = url.searchParams.get('target') || '0';
     // 检查是否需要JSON格式返回
     const jsonFormat = url.searchParams.get('json') === 'true';
 
