@@ -8,8 +8,7 @@ const CATEGORY_CONFIG = {
     // 可以添加更多分类
 };
 
-// 远程JSON数据的基础URL
-const BASE_JSON_URL = 'https://api-vercel.blockhaity.dpdns.org/img/';
+const BASE_JSON_URL = 'https://blockhaity-api.netlify.app/img/';
 
 // 错误响应函数
 function errorResponse(message, status = 400) {
@@ -25,6 +24,7 @@ function errorResponse(message, status = 400) {
 // 获取随机数组项
 function getRandomItem(array) {
     return array[Math.floor(Math.random() * array.length)];
+}
 }
 
 // 从远程获取JSON数据
@@ -122,6 +122,10 @@ async function handleImageRequest(request) {
         // 确定返回source还是local
         const useSource = url.searchParams.get('source') === 'true';
         let imageUrl = useSource ? randomItem.source : randomItem.local;
+        // 替换local URL中的域名
+        if (!useSource) {
+            imageUrl = imageUrl.replace('api-vercel.blockhaity.dpdns.org', 'blockhaity-api.netlify.app');
+        }
 
         if (!imageUrl) {
             return errorResponse('图片URL不存在', 404);
@@ -185,3 +189,5 @@ export default async (request, context) => {
 
     return handleImageRequest(request);
 };
+
+
