@@ -122,10 +122,10 @@ if __name__ == "__main__":
     baapk = {}
     baapk["date"] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
     # global
-    url = "https://api.blockhaity.qzz.io/baapk/global"
+    url = "https://api-vercel.blockhaity.dpdns.org/baapk/global"
     baapk["global"] = get_final_url(url)
     # jp
-    url = "https://api.blockhaity.qzz.io/baapk/jp"
+    url = "https://api-vercel.blockhaity.dpdns.org/baapk/jp"
     baapk["jp"] = get_final_url(url)
     # cn
     request = Request("https://gsqc-api.bluearchive-cn.com/api/state", headers={"APP-VER": "1.8.2","PLATFORM-ID": "1", "CHANNEL-ID": "1"})
