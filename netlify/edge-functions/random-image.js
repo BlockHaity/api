@@ -1,5 +1,5 @@
 export const config = {
-    path: ["/images","/images/*"]
+    path: ["/images"]
 };
 
 const CATEGORY_CONFIG = {
@@ -24,7 +24,6 @@ function errorResponse(message, status = 400) {
 // 获取随机数组项
 function getRandomItem(array) {
     return array[Math.floor(Math.random() * array.length)];
-}
 }
 
 // 从远程获取JSON数据
@@ -86,18 +85,9 @@ async function fetchAllCategoriesData() {
 // 处理图片请求
 async function handleImageRequest(request) {
     const url = new URL(request.url);
-    const pathname = url.pathname;
 
-    // 解析分类 - 从路径中提取，例如 /images/bluearchive -> bluearchive
-    // 由于配置路径已经是 /images/*，所以路径会是 /images/bluearchive
-    // 分割后得到 ['', 'images', 'bluearchive']，取索引2
-    let category = pathname.split('/').filter(Boolean)[1] || 'all';
-
-    // 支持直接通过查询参数指定分类
-    const queryCategory = url.searchParams.get('category');
-    if (queryCategory) {
-        category = queryCategory;
-    }
+    // 从查询参数获取分类，默认为 'all'
+    const category = url.searchParams.get('category') || 'all';
 
     try {
         let data;
@@ -189,5 +179,3 @@ export default async (request, context) => {
 
     return handleImageRequest(request);
 };
-
-

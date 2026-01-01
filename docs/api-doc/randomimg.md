@@ -4,7 +4,7 @@
 
 ## 使用方法
 
-你可以通过你可以在API地址末尾加上`/<分组>`来选择对应的分组，添加`?source=ture`来从图片源来获取图片。
+你可以通过你可以在API地址末尾加上`?category=<分组>`来选择对应的分组，添加`?source=ture`来从图片源来获取图片。
 
 <!-- tabs:start -->
 #### **Cloudflare-Vercel节点**
