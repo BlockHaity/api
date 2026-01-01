@@ -91,16 +91,9 @@ async function fetchAllCategoriesData() {
 // 处理图片请求
 async function handleImageRequest(request) {
   const url = new URL(request.url);
-  const pathname = url.pathname;
   
-  // 解析分类 - 从路径中提取，例如 /images/bluearchive -> bluearchive
-  let category = pathname.split('/').filter(Boolean)[1] || 'all';
-  
-  // 支持直接通过查询参数指定分类
-  const queryCategory = url.searchParams.get('category');
-  if (queryCategory) {
-    category = queryCategory;
-  }
+  // 只通过查询参数获取分类，如果没有提供则默认为'all'
+  const category = url.searchParams.get('category') || 'all';
   
   try {
     let data;
@@ -193,3 +186,4 @@ export default async function handler(request) {
   
   return handleImageRequest(request);
 }
+
