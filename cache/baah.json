@@ -68,7 +68,7 @@
                 "state": "uploaded",
                 "size": 169742987,
                 "digest": "sha256:be3c00cc773d45e56a0847a0e446924e32420a23cb780547b6bcd2d38505763f",
-                "download_count": 71,
+                "download_count": 76,
                 "created_at": "2026-02-06T12:45:04Z",
                 "updated_at": "2026-02-06T12:45:10Z",
                 "browser_download_url": "https://github.com/BlueArchiveArisHelper/BAAH/releases/download/BAAH2.1.0/BAAH2.1.0.zip"
