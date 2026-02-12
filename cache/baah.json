@@ -68,7 +68,7 @@
                 "state": "uploaded",
                 "size": 169742936,
                 "digest": "sha256:e43dc2e2bb489c258283a5994794a796570ac3e153467fd4ef34cefe960dba83",
-                "download_count": 69,
+                "download_count": 70,
                 "created_at": "2026-02-11T08:43:34Z",
                 "updated_at": "2026-02-11T08:43:38Z",
                 "browser_download_url": "https://github.com/BlueArchiveArisHelper/BAAH/releases/download/BAAH2.1.2/BAAH2.1.2.zip"
@@ -528,7 +528,7 @@
                 "state": "uploaded",
                 "size": 169939350,
                 "digest": "sha256:9c87420cae4b7da7a0be5b8625a3af9a6cacf71be041d2c639429fe6e1d30ea1",
-                "download_count": 437,
+                "download_count": 438,
                 "created_at": "2026-01-22T07:41:06Z",
                 "updated_at": "2026-01-22T07:41:11Z",
                 "browser_download_url": "https://github.com/BlueArchiveArisHelper/BAAH/releases/download/BAAH2.0.9/BAAH2.0.9.zip"
@@ -643,7 +643,7 @@
                 "state": "uploaded",
                 "size": 169938931,
                 "digest": "sha256:41994bed96c85642f2ee0bc3d95a186440a09661e99182e95d5cb30205fddd41",
-                "download_count": 299,
+                "download_count": 300,
                 "created_at": "2026-01-19T15:35:42Z",
                 "updated_at": "2026-01-19T15:35:47Z",
                 "browser_download_url": "https://github.com/BlueArchiveArisHelper/BAAH/releases/download/BAAH2.0.8/BAAH2.0.8.zip"
