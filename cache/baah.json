@@ -1,10 +1,10 @@
 [
     {
-        "url": "https://api.github.com/repos/BlueArchiveArisHelper/BAAH/releases/295049636",
-        "assets_url": "https://api.github.com/repos/BlueArchiveArisHelper/BAAH/releases/295049636/assets",
-        "upload_url": "https://uploads.github.com/repos/BlueArchiveArisHelper/BAAH/releases/295049636/assets{?name,label}",
-        "html_url": "https://github.com/BlueArchiveArisHelper/BAAH/releases/tag/BAAH2.2.0",
-        "id": 295049636,
+        "url": "https://api.github.com/repos/BlueArchiveArisHelper/BAAH/releases/295089766",
+        "assets_url": "https://api.github.com/repos/BlueArchiveArisHelper/BAAH/releases/295089766/assets",
+        "upload_url": "https://uploads.github.com/repos/BlueArchiveArisHelper/BAAH/releases/295089766/assets{?name,label}",
+        "html_url": "https://github.com/BlueArchiveArisHelper/BAAH/releases/tag/BAAH2.2.3",
+        "id": 295089766,
         "author": {
             "login": "github-actions[bot]",
             "id": 41898282,
@@ -26,22 +26,22 @@
             "user_view_type": "public",
             "site_admin": false
         },
-        "node_id": "RE_kwDOKrlz7s4Rlhmk",
-        "tag_name": "BAAH2.2.0",
+        "node_id": "RE_kwDOKrlz7s4RlrZm",
+        "tag_name": "BAAH2.2.3",
         "target_commitish": "main",
-        "name": "BAAH2.2.0",
+        "name": "BAAH2.2.3",
         "draft": false,
         "immutable": false,
         "prerelease": false,
-        "created_at": "2026-03-10T08:25:08Z",
-        "updated_at": "2026-03-10T08:31:37Z",
-        "published_at": "2026-03-10T08:31:37Z",
+        "created_at": "2026-03-10T10:03:41Z",
+        "updated_at": "2026-03-10T10:08:41Z",
+        "published_at": "2026-03-10T10:08:41Z",
         "assets": [
             {
-                "url": "https://api.github.com/repos/BlueArchiveArisHelper/BAAH/releases/assets/370683102",
-                "id": 370683102,
-                "node_id": "RA_kwDOKrlz7s4WGCze",
-                "name": "BAAH2.2.0.zip",
+                "url": "https://api.github.com/repos/BlueArchiveArisHelper/BAAH/releases/assets/370726291",
+                "id": 370726291,
+                "node_id": "RA_kwDOKrlz7s4WGNWT",
+                "name": "BAAH2.2.3.zip",
                 "label": "",
                 "uploader": {
                     "login": "github-actions[bot]",
@@ -66,18 +66,18 @@
                 },
                 "content_type": "application/zip",
                 "state": "uploaded",
-                "size": 170338675,
-                "digest": "sha256:5985694519b916d5e5d9326b6154e1c219ef768b33b4588ecea42367e1f93b45",
-                "download_count": 1,
-                "created_at": "2026-03-10T08:31:31Z",
-                "updated_at": "2026-03-10T08:31:37Z",
-                "browser_download_url": "https://github.com/BlueArchiveArisHelper/BAAH/releases/download/BAAH2.2.0/BAAH2.2.0.zip"
+                "size": 170339116,
+                "digest": "sha256:43d8fd112b73df880e53962cf5f39c754e2ab54164459933ca5b73462ecbb2fb",
+                "download_count": 2,
+                "created_at": "2026-03-10T10:08:36Z",
+                "updated_at": "2026-03-10T10:08:41Z",
+                "browser_download_url": "https://github.com/BlueArchiveArisHelper/BAAH/releases/download/BAAH2.2.3/BAAH2.2.3.zip"
             },
             {
-                "url": "https://api.github.com/repos/BlueArchiveArisHelper/BAAH/releases/assets/370683103",
-                "id": 370683103,
-                "node_id": "RA_kwDOKrlz7s4WGCzf",
-                "name": "BAAH2.2.0_update.zip",
+                "url": "https://api.github.com/repos/BlueArchiveArisHelper/BAAH/releases/assets/370726289",
+                "id": 370726289,
+                "node_id": "RA_kwDOKrlz7s4WGNWR",
+                "name": "BAAH2.2.3_update.zip",
                 "label": "",
                 "uploader": {
                     "login": "github-actions[bot]",
@@ -102,17 +102,17 @@
                 },
                 "content_type": "application/zip",
                 "state": "uploaded",
-                "size": 15454385,
-                "digest": "sha256:f815de2e21f7dc430d75809a9877032b88b879f8422ca729a1ea66665f5f0822",
-                "download_count": 2,
-                "created_at": "2026-03-10T08:31:31Z",
-                "updated_at": "2026-03-10T08:31:32Z",
-                "browser_download_url": "https://github.com/BlueArchiveArisHelper/BAAH/releases/download/BAAH2.2.0/BAAH2.2.0_update.zip"
+                "size": 15454659,
+                "digest": "sha256:d85a03747002dfcc35ac0f9b12d5b050fad2c85bc2a1fc16c82a650e538ec9d9",
+                "download_count": 8,
+                "created_at": "2026-03-10T10:08:36Z",
+                "updated_at": "2026-03-10T10:08:37Z",
+                "browser_download_url": "https://github.com/BlueArchiveArisHelper/BAAH/releases/download/BAAH2.2.3/BAAH2.2.3_update.zip"
             }
         ],
-        "tarball_url": "https://api.github.com/repos/BlueArchiveArisHelper/BAAH/tarball/BAAH2.2.0",
-        "zipball_url": "https://api.github.com/repos/BlueArchiveArisHelper/BAAH/zipball/BAAH2.2.0",
-        "body": "\r\n>> BAAH2: https://baah.sanmusen.top/ <<\r\n\r\n优化 GUI 界面 | optimize GUI interface\r\n\r\n修复了部分已知问题 | fixed some known issues\r\n\r\n\r\n"
+        "tarball_url": "https://api.github.com/repos/BlueArchiveArisHelper/BAAH/tarball/BAAH2.2.3",
+        "zipball_url": "https://api.github.com/repos/BlueArchiveArisHelper/BAAH/zipball/BAAH2.2.3",
+        "body": "\r\n>> BAAH2: https://baah.sanmusen.top/ <<\r\n\r\n优化 GUI 界面 | optimize GUI interface\r\n\r\n修复了2.2.1 GUI看不到任务列表问题 | fixed the problem that the task list is not visible in 2.2.1 GUI\r\n\r\n\r\n"
     },
     {
         "url": "https://api.github.com/repos/BlueArchiveArisHelper/BAAH/releases/291576782",
@@ -183,7 +183,7 @@
                 "state": "uploaded",
                 "size": 170329423,
                 "digest": "sha256:9b2f9f8d6b068d3ecfe4ff869b1b89e20a3e5a843b482b356ad2d14628fcb324",
-                "download_count": 205,
+                "download_count": 209,
                 "created_at": "2026-02-28T03:14:27Z",
                 "updated_at": "2026-02-28T03:14:32Z",
                 "browser_download_url": "https://github.com/BlueArchiveArisHelper/BAAH/releases/download/BAAH2.1.7/BAAH2.1.7.zip"
@@ -219,7 +219,7 @@
                 "state": "uploaded",
                 "size": 15447190,
                 "digest": "sha256:855d04d1afdeb84ec3c3af067bbee25b3cff26976619f0b018cff9f374dfdb9e",
-                "download_count": 33,
+                "download_count": 34,
                 "created_at": "2026-02-28T03:14:27Z",
                 "updated_at": "2026-02-28T03:14:28Z",
                 "browser_download_url": "https://github.com/BlueArchiveArisHelper/BAAH/releases/download/BAAH2.1.7/BAAH2.1.7_update.zip"
