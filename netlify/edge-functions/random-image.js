@@ -88,6 +88,8 @@ async function handleImageRequest(request) {
 
     // 从查询参数获取分类，默认为 'all'
     const category = url.searchParams.get('category') || 'all';
+    // 从查询参数获取颜色主题
+    const color = url.searchParams.get('color');
 
     try {
         let data;
@@ -104,6 +106,15 @@ async function handleImageRequest(request) {
 
         if (!Array.isArray(data) || data.length === 0) {
             return errorResponse(`分类 ${category} 没有可用的图片数据`, 404);
+        }
+
+        // 根据颜色主题过滤数据
+        if (color === 'light' || color === 'dark') {
+            const filteredData = data.filter(item => item.color === color);
+            if (filteredData.length === 0) {
+                return errorResponse(`分类 ${category} 中没有 ${color} 主题的图片`, 404);
+            }
+            data = filteredData;
         }
 
         // 获取随机图片

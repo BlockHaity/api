@@ -1,90 +1,112 @@
 [
     {
         "source": "https://patchwiki.biligame.com/images/ba/7/71/keo5kmhlada5vc70cy8oyrnr4sqrw0i.png",
-        "local": "https://api-vercel.blockhaity.dpdns.org/img/miku/1.png"
+        "local": "https://api-vercel.blockhaity.dpdns.org/img/miku/1.png",
+        "color": "light"
     },
     {
         "source": "https://pximg.perennialte.ch/img-original/img/2025/09/01/18/11/11/134592763_p0.jpg",
-        "local": "https://api-vercel.blockhaity.dpdns.org/img/miku/2.jpg"
+        "local": "https://api-vercel.blockhaity.dpdns.org/img/miku/2.jpg",
+        "color": "light"
     },
     {
         "source": "https://pximg.perennialte.ch/img-original/img/2020/07/10/00/00/17/82867352_p0.jpg",
-        "local": "https://api-vercel.blockhaity.dpdns.org/img/miku/3.jpg"
+        "local": "https://api-vercel.blockhaity.dpdns.org/img/miku/3.jpg",
+        "color": "dark"
     },
     {
         "source": "https://pximg.perennialte.ch/img-original/img/2025/09/04/20/48/15/134708786_p0.jpg",
-        "local": "https://api-vercel.blockhaity.dpdns.org/img/miku/4.jpg"
+        "local": "https://api-vercel.blockhaity.dpdns.org/img/miku/4.jpg",
+        "color": "light"
     },
     {
         "source": "https://pximg.perennialte.ch/img-original/img/2025/09/03/01/31/15/134648671_p0.jpg",
-        "local": "https://api-vercel.blockhaity.dpdns.org/img/miku/5.jpg"
+        "local": "https://api-vercel.blockhaity.dpdns.org/img/miku/5.jpg",
+        "color": "light"
     },
     {
         "source": "https://pximg.perennialte.ch/img-original/img/2025/09/02/16/23/18/134627729_p0.jpg",
-        "local": "https://api-vercel.blockhaity.dpdns.org/img/miku/6.jpg"
+        "local": "https://api-vercel.blockhaity.dpdns.org/img/miku/6.jpg",
+        "color": "light"
     },
     {
         "source": "https://pximg.perennialte.ch/img-original/img/2025/09/01/00/05/09/134569571_p0.jpg",
-        "local": "https://api-vercel.blockhaity.dpdns.org/img/miku/7.jpg"
+        "local": "https://api-vercel.blockhaity.dpdns.org/img/miku/7.jpg",
+        "color": "light"
     },
     {
         "source": "https://pximg.perennialte.ch/img-original/img/2025/08/31/11/47/13/134538072_p0.png",
-        "local": "https://api-vercel.blockhaity.dpdns.org/img/miku/8.png"
+        "local": "https://api-vercel.blockhaity.dpdns.org/img/miku/8.png",
+        "color": "dark"
     },
     {
         "source": "https://pximg.perennialte.ch/img-original/img/2025/08/31/12/14/17/134539077_p0.jpg",
-        "local": "https://api-vercel.blockhaity.dpdns.org/img/miku/9.jpg"
+        "local": "https://api-vercel.blockhaity.dpdns.org/img/miku/9.jpg",
+        "color": "light"
     },
     {
         "source": "https://pximg.perennialte.ch/img-original/img/2025/08/31/10/29/57/134535814_p0.jpg",
-        "local": "https://api-vercel.blockhaity.dpdns.org/img/miku/10.jpg"
+        "local": "https://api-vercel.blockhaity.dpdns.org/img/miku/10.jpg",
+        "color": "dark"
     },
     {
         "source": "https://pximg.perennialte.ch/img-original/img/2013/08/31/00/06/27/38183202_p0.jpg",
-        "local": "https://api-vercel.blockhaity.dpdns.org/img/miku/11.jpg"
+        "local": "https://api-vercel.blockhaity.dpdns.org/img/miku/11.jpg",
+        "color": "dark"
     },
     {
         "source": "https://pximg.perennialte.ch/img-original/img/2022/08/24/11/02/31/100723659_p0.jpg",
-        "local": "https://api-vercel.blockhaity.dpdns.org/img/miku/12.jpg"
+        "local": "https://api-vercel.blockhaity.dpdns.org/img/miku/12.jpg",
+        "color": "dark"
     },
     {
         "source": "https://pximg.perennialte.ch/img-original/img/2026/01/21/00/00/22/140183601_p0.png",
-        "local": "https://api-vercel.blockhaity.dpdns.org/img/miku/13.png"
+        "local": "https://api-vercel.blockhaity.dpdns.org/img/miku/13.png",
+        "color": "dark"
     },
     {
         "source": "https://pximg.perennialte.ch/img-original/img/2026/01/14/01/09/11/139906274_p0.jpg",
-        "local": "https://api-vercel.blockhaity.dpdns.org/img/miku/14.jpg"
+        "local": "https://api-vercel.blockhaity.dpdns.org/img/miku/14.jpg",
+        "color": "light"
     },
     {
         "source": "https://pximg.perennialte.ch/img-original/img/2026/01/30/18/39/19/140552876_p0.jpg",
-        "local": "https://api-vercel.blockhaity.dpdns.org/img/miku/15.jpg"
+        "local": "https://api-vercel.blockhaity.dpdns.org/img/miku/15.jpg",
+        "color": "light"
     },
     {
         "source": "https://pximg.perennialte.ch/img-original/img/2026/01/29/00/08/06/140492504_p0.png",
-        "local": "https://api-vercel.blockhaity.dpdns.org/img/miku/16.png"
+        "local": "https://api-vercel.blockhaity.dpdns.org/img/miku/16.png",
+        "color": "light"
     },
     {
         "source": "https://pximg.perennialte.ch/img-original/img/2026/01/25/15/36/01/140359053_p0.jpg",
-        "local": "https://api-vercel.blockhaity.dpdns.org/img/miku/17.jpg"
+        "local": "https://api-vercel.blockhaity.dpdns.org/img/miku/17.jpg",
+        "color": "light"
     },
     {
         "source": "https://pximg.perennialte.ch/img-original/img/2026/01/18/15/40/11/140083120_p0.jpg",
-        "local": "https://api-vercel.blockhaity.dpdns.org/img/miku/18.jpg"
+        "local": "https://api-vercel.blockhaity.dpdns.org/img/miku/18.jpg",
+        "color": "light"
     },
     {
         "source": "https://pximg.perennialte.ch/img-original/img/2025/09/13/21/43/08/135056860_p0.jpg",
-        "local": "https://api-vercel.blockhaity.dpdns.org/img/miku/19.jpg"
+        "local": "https://api-vercel.blockhaity.dpdns.org/img/miku/19.jpg",
+        "color": "light"
     },
     {
         "source": "https://pximg.perennialte.ch/img-original/img/2025/08/31/23/48/30/134567976_p0.jpg",
-        "local": "https://api-vercel.blockhaity.dpdns.org/img/miku/20.jpg"
+        "local": "https://api-vercel.blockhaity.dpdns.org/img/miku/20.jpg",
+        "color": "dark"
     },
     {
         "source": "https://pximg.perennialte.ch/img-original/img/2025/08/31/00/00/12/134520087_p0.jpg",
-        "local": "https://api-vercel.blockhaity.dpdns.org/img/miku/21.jpg"
+        "local": "https://api-vercel.blockhaity.dpdns.org/img/miku/21.jpg",
+        "color": "light"
     },
     {
         "source": "https://pximg.perennialte.ch/img-original/img/2025/03/09/23/57/42/128044744_p0.jpg",
-        "local": "https://api-vercel.blockhaity.dpdns.org/img/miku/22.jpg"
+        "local": "https://api-vercel.blockhaity.dpdns.org/img/miku/22.jpg",
+        "color": "light"
     }
 ]
