@@ -68,7 +68,7 @@
                 "state": "uploaded",
                 "size": 172880401,
                 "digest": "sha256:7122fa5cfbf5cbeac3f4f6c140f4e2130dcb9a062eb988cd28d2cbef22c4b737",
-                "download_count": 46,
+                "download_count": 52,
                 "created_at": "2026-07-06T04:49:28Z",
                 "updated_at": "2026-07-06T04:49:33Z",
                 "browser_download_url": "https://github.com/BlueArchiveArisHelper/BAAH/releases/download/BAAH2.2.21/BAAH2.2.21.zip"
@@ -104,7 +104,7 @@
                 "state": "uploaded",
                 "size": 16220176,
                 "digest": "sha256:c379244ce6bc8d972037261d2f67d159cfaea995269d14728067e1a23e21e607",
-                "download_count": 12,
+                "download_count": 15,
                 "created_at": "2026-07-06T04:49:28Z",
                 "updated_at": "2026-07-06T04:49:28Z",
                 "browser_download_url": "https://github.com/BlueArchiveArisHelper/BAAH/releases/download/BAAH2.2.21/BAAH2.2.21_update.zip"
@@ -219,7 +219,7 @@
                 "state": "uploaded",
                 "size": 16219598,
                 "digest": "sha256:3f4dc26b56bfce97cb79389e4a4aa68184b229f771c9a52346ff1698435feb43",
-                "download_count": 33,
+                "download_count": 34,
                 "created_at": "2026-06-30T08:53:49Z",
                 "updated_at": "2026-06-30T08:53:50Z",
                 "browser_download_url": "https://github.com/BlueArchiveArisHelper/BAAH/releases/download/BAAH2.2.20/BAAH2.2.20_update.zip"
@@ -298,7 +298,7 @@
                 "state": "uploaded",
                 "size": 172879649,
                 "digest": "sha256:fe67f800ca9d3ec4f8caf6b57c5ddbb4effd8d6842c70912e474b53aefbe5098",
-                "download_count": 16,
+                "download_count": 17,
                 "created_at": "2026-06-30T07:10:34Z",
                 "updated_at": "2026-06-30T07:10:39Z",
                 "browser_download_url": "https://github.com/BlueArchiveArisHelper/BAAH/releases/download/BAAH2.2.19/BAAH2.2.19.zip"
