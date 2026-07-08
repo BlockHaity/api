@@ -104,7 +104,7 @@
                 "state": "uploaded",
                 "size": 16220176,
                 "digest": "sha256:c379244ce6bc8d972037261d2f67d159cfaea995269d14728067e1a23e21e607",
-                "download_count": 19,
+                "download_count": 20,
                 "created_at": "2026-07-06T04:49:28Z",
                 "updated_at": "2026-07-06T04:49:28Z",
                 "browser_download_url": "https://github.com/BlueArchiveArisHelper/BAAH/releases/download/BAAH2.2.21/BAAH2.2.21_update.zip"
