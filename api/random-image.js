@@ -107,7 +107,7 @@ async function handleImageRequest(request) {
     const randomItem = getRandomItem(data);
 
     const useSource = url.searchParams.get('source') === 'true';
-    const imageUrl = useSource ? randomItem.source : randomItem.local;
+    let imageUrl = useSource ? randomItem.source : randomItem.local;
 
     if (!imageUrl) {
       return errorResponse('图片URL不存在', 404);
