@@ -33,6 +33,37 @@ const FORWARD_RESPONSE_HEADERS = [
   'x-oneapi-request-id',
 ];
 
+const AGNES_MODEL_MAP = {
+  'agnes-2.5-flash': 'agnes-2.5-flash',
+  'agnes-2.0-flash': 'agnes-2.0-flash',
+  'agnes-2.5-pro-alpha': 'agnes-2.5-pro-alpha',
+  'agnes-image-2.0-flash': 'agnes-image-2.0-flash',
+  'agnes-image-2.1-flash': 'agnes-image-2.1-flash',
+  'agnes-video-v2.0': 'agnes-video-v2.0',
+};
+
+const AGNES_DEFAULT_MODEL = 'agnes-2.5-flash';
+
+const AGNES_MODEL_ENDPOINTS = {
+  '/chat/completions': 'chat',
+  '/images/generations': 'image',
+  '/images/edits': 'image',
+  '/images/variations': 'image',
+  '/embeddings': 'embedding',
+  '/audio/speech': 'audio',
+  '/audio/transcriptions': 'audio',
+  '/audio/translations': 'audio',
+  '/fine-tuning': 'chat',
+  '/completions': 'chat',
+};
+
+const AGNES_MODEL_FALLBACKS = {
+  chat: 'agnes-2.5-flash',
+  image: 'agnes-image-2.0-flash',
+  embedding: 'agnes-2.5-flash',
+  audio: 'agnes-2.5-flash',
+};
+
 function buildTargetUrl(pathname, searchParams) {
   let proxyPath = pathname.replace(/^\/api\/agnes-api|^\/agnes-api/, '') || '/';
 
@@ -51,6 +82,67 @@ function buildTargetUrl(pathname, searchParams) {
   });
 
   return targetUrl;
+}
+
+function getEndpointKey(pathname) {
+  const match = pathname.match(/\/v1(\/[^/]+\/[^/]+)/);
+  if (match) return match[1];
+  const match2 = pathname.match(/\/v1(\/[^/]+)/);
+  if (match2) return match2[1];
+  return null;
+}
+
+function getFallbackModel(pathname) {
+  const endpointKey = getEndpointKey(pathname);
+  const endpointType = AGNES_MODEL_ENDPOINTS[endpointKey];
+  if (endpointType) {
+    return AGNES_MODEL_FALLBACKS[endpointType];
+  }
+  return AGNES_DEFAULT_MODEL;
+}
+
+function resolveModel(model, pathname) {
+  if (!model || typeof model !== 'string') {
+    return getFallbackModel(pathname);
+  }
+
+  const mapped = AGNES_MODEL_MAP[model];
+  if (mapped) {
+    return mapped;
+  }
+
+  return model;
+}
+
+async function processRequestBody(pathname, body) {
+  if (!body) return { body: null, isModified: false };
+
+  try {
+    const bodyText = new TextDecoder().decode(body);
+    const bodyObj = JSON.parse(bodyText);
+
+    let isModified = false;
+    const resolved = resolveModel(bodyObj.model, pathname);
+
+    if (resolved !== bodyObj.model) {
+      bodyObj.model = resolved;
+      isModified = true;
+    }
+
+    if (!bodyObj.model) {
+      bodyObj.model = getFallbackModel(pathname);
+      isModified = true;
+    }
+
+    if (!isModified) {
+      return { body, isModified: false };
+    }
+
+    const newBody = JSON.stringify(bodyObj);
+    return { body: new TextEncoder().encode(newBody), isModified: true };
+  } catch {
+    return { body, isModified: false };
+  }
 }
 
 function buildResponseHeaders(upstreamHeaders) {
@@ -82,6 +174,27 @@ function buildResponseHeaders(upstreamHeaders) {
   return headers;
 }
 
+async function isModelNotFoundError(response) {
+  if (response.status !== 400 && response.status !== 401 && response.status !== 404) {
+    return false;
+  }
+  try {
+    const text = await response.text();
+    const obj = JSON.parse(text);
+    const msg = (obj.error?.message || obj.message || '').toLowerCase();
+    return (
+      msg.includes('model') &&
+      (msg.includes('not found') ||
+        msg.includes('not exist') ||
+        msg.includes('不存在') ||
+        msg.includes('invalid model') ||
+        msg.includes('unsupported model'))
+    );
+  } catch {
+    return false;
+  }
+}
+
 export default async function handler(req) {
   if (req.method === 'OPTIONS') {
     return new Response(null, {
@@ -107,15 +220,29 @@ export default async function handler(req) {
     }
     headers.set('Host', 'apihub.agnes-ai.com');
 
-    let body = undefined;
-    if (req.method !== 'GET' && req.method !== 'HEAD' && req.body) {
-      body = await req.arrayBuffer();
+    let rawBody = null;
+    if (req.method !== 'GET' && req.method !== 'HEAD') {
+      try {
+        const buf = await req.arrayBuffer();
+        rawBody = new Uint8Array(buf);
+      } catch {
+        rawBody = null;
+      }
+    }
+
+    const { body: processedBody, isModified } = await processRequestBody(
+      targetUrl.pathname,
+      rawBody,
+    );
+
+    if (processedBody) {
+      headers.set('Content-Length', String(processedBody.byteLength));
     }
 
     const response = await fetch(targetUrl.toString(), {
       method: req.method,
       headers,
-      body,
+      body: processedBody || undefined,
       redirect: 'follow',
     });
 
@@ -128,6 +255,46 @@ export default async function handler(req) {
         statusText: response.statusText,
         headers: responseHeaders,
       });
+    }
+
+    if (response.status === 400 || response.status === 401) {
+      const willRetry = await isModelNotFoundError(response);
+      if (willRetry && isModified === false) {
+        try {
+          const bodyObj = JSON.parse(new TextDecoder().decode(rawBody));
+          const fallback = getFallbackModel(targetUrl.pathname);
+          bodyObj.model = fallback;
+
+          const retryBody = new TextEncoder().encode(JSON.stringify(bodyObj));
+          headers.set('Content-Length', String(retryBody.byteLength));
+
+          const retryResponse = await fetch(targetUrl.toString(), {
+            method: req.method,
+            headers,
+            body: retryBody,
+            redirect: 'follow',
+          });
+
+          const retryHeaders = buildResponseHeaders(retryResponse.headers);
+          const retryResponseBody = retryResponse.body;
+
+          if (!retryResponseBody || req.method === 'HEAD') {
+            return new Response(null, {
+              status: retryResponse.status,
+              statusText: retryResponse.statusText,
+              headers: retryHeaders,
+            });
+          }
+
+          return new Response(retryResponseBody, {
+            status: retryResponse.status,
+            statusText: retryResponse.statusText,
+            headers: retryHeaders,
+          });
+        } catch {
+          // retry failed, return original response
+        }
+      }
     }
 
     return new Response(responseBody, {
