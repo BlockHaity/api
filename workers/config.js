@@ -20,3 +20,5 @@ export const GITHUB_API_URL = `https://api.github.com/repos/${GITHUB_REPO}/relea
 export const BACKUP_API_URL = 'https://api-vercel.blockhaity.dpdns.org/cache/baah.json';
 
 export const CACHE_TTL = 86400;
+
+export const GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/BlockHaity/api/main';

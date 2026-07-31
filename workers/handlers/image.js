@@ -1,4 +1,4 @@
-import { CATEGORY_CONFIG, BASE_JSON_URL } from '../config.js';
+import { CATEGORY_CONFIG, BASE_JSON_URL, GITHUB_RAW_BASE, CACHE_TTL } from '../config.js';
 import { errorResponse, getRandomItem } from '../utils.js';
 
 async function fetchCategoryData(category) {
@@ -54,6 +54,15 @@ async function fetchAllCategoriesData() {
   }
 }
 
+function localToGithubRaw(localUrl) {
+  try {
+    const url = new URL(localUrl);
+    return `${GITHUB_RAW_BASE}${url.pathname}`;
+  } catch {
+    return `${GITHUB_RAW_BASE}${localUrl}`;
+  }
+}
+
 export async function handleImageRequest(request) {
   const url = new URL(request.url);
 
@@ -85,24 +94,18 @@ export async function handleImageRequest(request) {
     const randomItem = getRandomItem(data);
 
     const useSource = url.searchParams.get('source') === 'true';
-    let imageUrl = useSource ? randomItem.source : randomItem.local;
+    const imageUrl = useSource ? randomItem.source : localToGithubRaw(randomItem.local);
 
     if (!imageUrl) {
       return errorResponse('图片URL不存在', 404);
     }
 
-    try {
-      new URL(imageUrl);
-    } catch (e) {
-      if (imageUrl.startsWith('/')) {
-        const baseUrl = new URL(BASE_JSON_URL);
-        imageUrl = `${baseUrl.origin}${imageUrl}`;
-      } else {
-        return errorResponse(`无效的图片URL: ${imageUrl}`, 400);
-      }
-    }
-
-    const imageResponse = await fetch(imageUrl);
+    const imageResponse = await fetch(imageUrl, {
+      cf: {
+        cacheTtl: CACHE_TTL,
+        cacheEverything: true,
+      },
+    });
 
     if (!imageResponse.ok) {
       return errorResponse('无法获取图片', 500);
@@ -110,7 +113,7 @@ export async function handleImageRequest(request) {
 
     const headers = new Headers(imageResponse.headers);
     headers.set('Access-Control-Allow-Origin', '*');
-    headers.set('Cache-Control', 'public, max-age=60');
+    headers.set('Cache-Control', 'public, max-age=86400');
 
     return new Response(imageResponse.body, {
       status: imageResponse.status,
