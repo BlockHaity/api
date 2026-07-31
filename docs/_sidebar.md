@@ -1,5 +1,6 @@
 - [主页](/)
 - API文档
+  - [agnes-api](/api-doc/agnes-api)
   - [baapk](/api-doc/baapk)
   - [randomimg](/api-doc/randomimg)
   - [gh-download](/api-doc/gh-download)

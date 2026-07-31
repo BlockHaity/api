@@ -3,6 +3,7 @@ import { errorResponse } from './utils.js';
 import { handleImageRequest } from './handlers/image.js';
 import { handleGitHubDownload } from './handlers/github-download.js';
 import { handleGetBAAH } from './handlers/getbaah.js';
+import { handleAgnesApi } from './handlers/agnes-api.js';
 
 export default {
   async fetch(request, env, ctx) {
@@ -17,10 +18,14 @@ export default {
       return new Response(null, {
         headers: {
           'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'GET, OPTIONS',
-          'Access-Control-Allow-Headers': 'Content-Type',
+          'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type, Authorization',
         },
       });
+    }
+
+    if (pathname === '/agnes-api' || pathname.startsWith('/agnes-api/')) {
+      return handleAgnesApi(request);
     }
 
     if (request.method !== 'GET') {

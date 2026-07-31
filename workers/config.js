@@ -22,3 +22,7 @@ export const BACKUP_API_URL = 'https://api-vercel.blockhaity.dpdns.org/cache/baa
 export const CACHE_TTL = 86400;
 
 export const GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/BlockHaity/api/main';
+
+export const AGNES_API_TARGET = {
+  base: 'https://apihub.agnes-ai.com',
+};

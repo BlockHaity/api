@@ -34,6 +34,14 @@
     {
       "source": "/getbaah",
       "destination": "/api/getbaah"
+    },
+    {
+      "source": "/agnes-api",
+      "destination": "/api/agnes-api"
+    },
+    {
+      "source": "/agnes-api/:path*",
+      "destination": "/api/agnes-api/:path*"
     }
   ]
 }
