@@ -4,6 +4,8 @@ export const config = {
 
 const TARGET_BASE = 'https://apihub.agnes-ai.com';
 
+const PROXY_FILE_HOSTS = ['platform-outputs.agnes-ai.space', 'storage.googleapis.com'];
+
 const HOP_BY_HOP_HEADERS = [
   'connection',
   'keep-alive',
@@ -49,12 +51,70 @@ function resolvePath(url) {
     proxyPath = url.pathname.replace(/^\/api\/agnes-media|^\/agnes-media/, '') || '/';
   }
 
+  if (proxyPath === '/download') {
+    return proxyPath;
+  }
   if (proxyPath === '/' || proxyPath === '') {
     proxyPath = '/v1/';
   } else if (!proxyPath.startsWith('/v1/') && !proxyPath.startsWith('/agnesapi')) {
     proxyPath = '/v1' + (proxyPath.startsWith('/') ? proxyPath : '/' + proxyPath);
   }
   return proxyPath;
+}
+
+function rewriteIfFileUrl(value, origin) {
+  if (typeof value !== 'string') return value;
+  try {
+    const u = new URL(value);
+    if (PROXY_FILE_HOSTS.includes(u.hostname)) {
+      return `${origin}/agnes-media/download?url=${encodeURIComponent(value)}`;
+    }
+  } catch {}
+  return value;
+}
+
+function walkAndRewrite(node, origin) {
+  if (Array.isArray(node)) {
+    for (const item of node) walkAndRewrite(item, origin);
+    return;
+  }
+  if (node && typeof node === 'object') {
+    for (const key of Object.keys(node)) {
+      const value = node[key];
+      if (key === 'url' && typeof value === 'string') {
+        node[key] = rewriteIfFileUrl(value, origin);
+      } else {
+        walkAndRewrite(value, origin);
+      }
+    }
+  }
+}
+
+async function handleDownload(url) {
+  const fileUrl = url.searchParams.get('url');
+  if (!fileUrl) {
+    return new Response(JSON.stringify({ error: '缺少 url 参数' }), {
+      status: 400,
+      headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+    });
+  }
+
+  const upstream = await fetch(fileUrl, { redirect: 'follow' });
+
+  const headers = new Headers();
+  for (const key of FORWARD_RESPONSE_HEADERS) {
+    const value = upstream.headers.get(key);
+    if (value) headers.set(key, value);
+  }
+  for (const [key, value] of Object.entries(CORS_HEADERS)) {
+    headers.set(key, value);
+  }
+
+  return new Response(upstream.body, {
+    status: upstream.status,
+    statusText: upstream.statusText,
+    headers,
+  });
 }
 
 export default async function handler(req) {
@@ -65,6 +125,10 @@ export default async function handler(req) {
   try {
     const url = new URL(req.url);
     const proxyPath = resolvePath(url);
+
+    if (proxyPath === '/download') {
+      return handleDownload(url);
+    }
 
     const targetUrl = new URL(proxyPath, TARGET_BASE);
     url.searchParams.forEach((value, key) => {
@@ -99,6 +163,26 @@ export default async function handler(req) {
     }
 
     const contentType = response.headers.get('content-type') || '';
+
+    if (contentType.includes('application/json')) {
+      const buffer = await response.arrayBuffer();
+      try {
+        const json = JSON.parse(new TextDecoder().decode(buffer));
+        walkAndRewrite(json, url.origin);
+        const rewrittenBody = JSON.stringify(json);
+        responseHeaders.set('content-type', 'application/json; charset=utf-8');
+        responseHeaders.set('content-length', String(new TextEncoder().encode(rewrittenBody).byteLength));
+        for (const [key, value] of Object.entries(CORS_HEADERS)) {
+          responseHeaders.set(key, value);
+        }
+        return new Response(rewrittenBody, {
+          status: response.status,
+          statusText: response.statusText,
+          headers: responseHeaders,
+        });
+      } catch {}
+    }
+
     if (contentType.includes('text/event-stream')) {
       responseHeaders.set('Cache-Control', 'no-cache, no-transform');
       responseHeaders.set('X-Accel-Buffering', 'no');
