@@ -8,13 +8,13 @@
 #### **Cloudflare-Vercel 节点**
 
 ```
-https://api.blockhaity.qzz.io/agnes-api
+https://api.blockhaity.dpdns.org/agnes-api
 ```
 
 #### **Cloudflare 节点**
 
 ```
-https://api-cloudflare.blockhaity.qzz.io/agnes-api
+https://api-cloudflare.blockhaity.dpdns.org/agnes-api
 ```
 
 #### **Vercel 节点**
