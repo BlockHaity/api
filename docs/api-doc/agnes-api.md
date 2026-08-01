@@ -5,18 +5,6 @@
 ## 节点地址
 
 <!-- tabs:start -->
-#### **Cloudflare-Vercel 节点**
-
-```
-https://api.blockhaity.dpdns.org/agnes-api
-```
-
-#### **Cloudflare 节点**
-
-```
-https://api-cloudflare.blockhaity.dpdns.org/agnes-api
-```
-
 #### **Vercel 节点**
 
 ```
@@ -259,7 +247,7 @@ while (true) {
 
 ## 技术特性
 
-- **边缘加速** — 请求经 Cloudflare / Netlify / Vercel 边缘节点转发，降低延迟
+- **边缘加速** — 请求经 Netlify / Vercel 边缘节点转发，降低延迟
 - **流式零缓冲** — SSE 流式响应逐块透传，无中间缓冲
 - **CORS 支持** — 自动处理跨域预检请求
 - **Hop-by-Hop 过滤** — 正确处理 HTTP 代理头部

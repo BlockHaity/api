@@ -3,7 +3,6 @@ import { errorResponse } from './utils.js';
 import { handleImageRequest } from './handlers/image.js';
 import { handleGitHubDownload } from './handlers/github-download.js';
 import { handleGetBAAH } from './handlers/getbaah.js';
-import { handleAgnesApi } from './handlers/agnes-api.js';
 
 export default {
   async fetch(request, env, ctx) {
@@ -22,10 +21,6 @@ export default {
           'Access-Control-Allow-Headers': 'Content-Type, Authorization',
         },
       });
-    }
-
-    if (pathname === '/agnes-api' || pathname.startsWith('/agnes-api/')) {
-      return handleAgnesApi(request);
     }
 
     if (request.method !== 'GET') {
