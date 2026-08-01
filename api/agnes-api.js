@@ -40,6 +40,25 @@ const CORS_HEADERS = {
   'Access-Control-Max-Age': '86400',
 };
 
+function resolvePath(url) {
+  let proxyPath;
+  const __path = url.searchParams.get('__path');
+  if (__path !== null) {
+    proxyPath = '/' + __path.replace(/^\/+/, '');
+  } else {
+    proxyPath = url.pathname.replace(/^\/api\/agnes-api|^\/agnes-api/, '') || '/';
+  }
+
+  if (!proxyPath.startsWith('/v1/')) {
+    if (proxyPath === '/' || proxyPath === '') {
+      proxyPath = '/v1/';
+    } else {
+      proxyPath = '/v1' + (proxyPath.startsWith('/') ? proxyPath : '/' + proxyPath);
+    }
+  }
+  return proxyPath;
+}
+
 export default async function handler(req) {
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: CORS_HEADERS });
@@ -47,18 +66,14 @@ export default async function handler(req) {
 
   try {
     const url = new URL(req.url);
-    let proxyPath = url.pathname.replace(/^\/api\/agnes-api|^\/agnes-api/, '') || '/';
-
-    if (!proxyPath.startsWith('/v1/')) {
-      if (proxyPath === '/' || proxyPath === '') {
-        proxyPath = '/v1/';
-      } else {
-        proxyPath = '/v1' + (proxyPath.startsWith('/') ? proxyPath : '/' + proxyPath);
-      }
-    }
+    const proxyPath = resolvePath(url);
 
     const targetUrl = new URL(proxyPath, TARGET_BASE);
-    url.searchParams.forEach((value, key) => targetUrl.searchParams.set(key, value));
+    url.searchParams.forEach((value, key) => {
+      if (key !== '__path') {
+        targetUrl.searchParams.set(key, value);
+      }
+    });
 
     const headers = new Headers();
     for (const [key, value] of req.headers) {
@@ -69,7 +84,7 @@ export default async function handler(req) {
 
     let body;
     if (req.method !== 'GET' && req.method !== 'HEAD') {
-      body = req.body;
+      body = await req.arrayBuffer();
     }
 
     const response = await fetch(targetUrl.toString(), {

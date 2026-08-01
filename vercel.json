@@ -41,7 +41,7 @@
     },
     {
       "source": "/agnes-api/:path*",
-      "destination": "/api/agnes-api/:path*"
+      "destination": "/api/agnes-api?__path=:path*"
     }
   ]
 }
