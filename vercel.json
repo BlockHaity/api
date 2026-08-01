@@ -42,6 +42,14 @@
     {
       "source": "/agnes-api/:path*",
       "destination": "/api/agnes-api?__path=:path*"
+    },
+    {
+      "source": "/agnes-media",
+      "destination": "/api/agnes-media"
+    },
+    {
+      "source": "/agnes-media/:path*",
+      "destination": "/api/agnes-media?__path=:path*"
     }
   ]
 }
