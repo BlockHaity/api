@@ -150,7 +150,7 @@ curl --location --request GET 'https://your-domain/agnes-media/agnesapi?video_id
   --header 'Authorization: Bearer YOUR_API_KEY'
 ```
 
-**响应示例**（任务完成后，视频 URL 位于 `metadata.url`）
+**响应示例**（任务完成后，视频直链位于 `metadata.url`，已自动改写为经代理加速的下载链接）
 
 ```json
 {
@@ -166,7 +166,7 @@ curl --location --request GET 'https://your-domain/agnes-media/agnesapi?video_id
   "seconds": "1.0",
   "size": "832x448",
   "metadata": {
-    "url": "https://platform-outputs.agnes-ai.space/videos/agnes-video-v2.0/task_YOUR_TASK_ID.mp4"
+    "url": "https://your-domain/agnes-media/download?url=https%3A%2F%2Fplatform-outputs.agnes-ai.space%2Fvideos%2Fagnes-video-v2.0%2Ftask_YOUR_TASK_ID.mp4"
   }
 }
 ```
@@ -295,14 +295,14 @@ data:image/png;base64,BASE64_HERE
 
 ### 响应格式
 
-**URL 输出**
+**URL 输出**（`data[0].url` 已自动改写为经代理加速的下载链接）
 
 ```json
 {
   "created": 1780000000,
   "data": [
     {
-      "url": "https://storage.googleapis.com/agnes-aigc/xxx.png",
+      "url": "https://your-domain/agnes-media/download?url=https%3A%2F%2Fstorage.googleapis.com%2Fagnes-aigc%2Fxxx.png",
       "b64_json": null,
       "revised_prompt": null
     }
@@ -324,6 +324,41 @@ data:image/png;base64,BASE64_HERE
   ]
 }
 ```
+
+## 加速下载
+
+生成的视频与图片文件由 Agnes 的存储域名（如 `platform-outputs.agnes-ai.space`、`storage.googleapis.com`）提供直链。`/agnes-media` 代理会将 API 响应中的直链（视频 `metadata.url`、图片 `data[0].url`）**自动改写**为经边缘节点加速的下载链接，无需手动拼接。
+
+改写后的链接格式：
+
+```
+GET /agnes-media/download?url=<原直链URL编码>
+```
+
+例如：
+
+```
+https://your-domain/agnes-media/download?url=https%3A%2F%2Fplatform-outputs.agnes-ai.space%2Fvideos%2Fagnes-video-v2.0%2Ftask_xxx.mp4
+```
+
+**特性**
+
+- **自动改写** — 无需额外参数，API 响应中的直链字段已替换为代理下载链接，端点保持不变
+- **流式转发** — 文件经边缘节点流式透传，支持断点续传（`Range`）与长视频/大图下载
+- **CORS 支持** — 可直接用于浏览器 `<video>` / `<img>` 标签或 `fetch` 请求
+- **无需鉴权** — 下载链接由代理生成，访问时无需携带 API Key
+
+**使用示例**
+
+```bash
+# 直接使用响应中的 metadata.url 或 data[0].url 即可
+curl -O 'https://your-domain/agnes-media/download?url=<编码后的直链>'
+
+# 浏览器直接播放
+# <video src="https://your-domain/agnes-media/download?url=..."></video>
+```
+
+> 注意：直链由上游生成，可能有时效。若下载返回 404，请重新创建生成任务并获取新的链接。
 
 ## 注意事项
 
