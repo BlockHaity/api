@@ -52,6 +52,14 @@
       "destination": "/api/agnes-media?__path=:path*"
     },
     {
+      "source": "/fish-audio-api/openai",
+      "destination": "/api/fish-audio-openai"
+    },
+    {
+      "source": "/fish-audio-api/openai/:path*",
+      "destination": "/api/fish-audio-openai?__path=:path*"
+    },
+    {
       "source": "/fish-audio-api",
       "destination": "/api/fish-audio"
     },

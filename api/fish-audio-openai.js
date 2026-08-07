@@ -1,38 +1,19 @@
 export const config = {
-  path: ['/fish-audio-api', '/fish-audio-api/*'],
+  runtime: 'edge',
 };
 
 const TARGET_BASE = 'https://api.fish.audio';
 
-const HOP_BY_HOP_HEADERS = [
-  'connection',
-  'keep-alive',
-  'proxy-authenticate',
-  'proxy-authorization',
-  'te',
-  'trailers',
-  'transfer-encoding',
-  'upgrade',
-  'host',
-  'origin',
-  'referer',
-  'cookie',
-  'set-cookie',
-];
+const OPENAI_VOICES = new Set([
+  'alloy', 'echo', 'fable', 'onyx', 'nova', 'shimmer',
+  'coral', 'sage', 'ash', 'ballad',
+]);
 
-const FORWARD_RESPONSE_HEADERS = [
-  'content-type',
-  'content-length',
-  'transfer-encoding',
-  'last-modified',
-  'etag',
-  'cache-control',
-  'accept-ranges',
-  'content-range',
-  'content-disposition',
-  'x-request-id',
-  'x-trace-id',
-];
+const MODEL_MAP = {
+  'tts-1': 's2.1-pro-free',
+  'tts-1-hd': 's2.1-pro',
+  'tts-1-free': 's2.1-pro-free',
+};
 
 const CORS_HEADERS = {
   'Access-Control-Allow-Origin': '*',
@@ -41,106 +22,34 @@ const CORS_HEADERS = {
   'Access-Control-Max-Age': '86400',
 };
 
-const OPENAI_VOICES = new Set([
-  'alloy', 'echo', 'fable', 'onyx', 'nova', 'shimmer',
-  'coral', 'sage', 'ash', 'ballad',
-]);
+function resolveOpenAIPath(url) {
+  let proxyPath;
+  const __path = url.searchParams.get('__path');
+  if (__path !== null) {
+    proxyPath = '/' + __path.replace(/^\/+/, '');
+  } else {
+    proxyPath = url.pathname.replace(/^\/api\/fish-audio-openai|^\/fish-audio-api\/openai/, '') || '/';
+  }
+  if (proxyPath === '/' || proxyPath === '') return '';
+  if (!proxyPath.startsWith('/')) proxyPath = '/' + proxyPath;
+  return proxyPath;
+}
 
-const OPENAI_MODEL_MAP = {
-  'tts-1': 's2.1-pro-free',
-  'tts-1-hd': 's2.1-pro',
-  'tts-1-free': 's2.1-pro-free',
-};
-
-export default async (request, context) => {
-  if (request.method === 'OPTIONS') {
+export default async function handler(req) {
+  if (req.method === 'OPTIONS') {
     return new Response(null, { headers: CORS_HEADERS });
   }
 
-  const url = new URL(request.url);
-
-  if (url.pathname.startsWith('/fish-audio-api/openai')) {
-    return handleOpenAIConverter(request);
-  }
-
-  try {
-    let proxyPath = url.pathname.replace(/^\/fish-audio-api/, '') || '/';
-
-    if (proxyPath === '/' || proxyPath === '') {
-      proxyPath = '/';
-    } else if (!proxyPath.startsWith('/')) {
-      proxyPath = '/' + proxyPath;
-    }
-
-    const targetUrl = new URL(proxyPath, TARGET_BASE);
-    url.searchParams.forEach((value, key) => targetUrl.searchParams.set(key, value));
-
-    const headers = new Headers();
-    for (const [key, value] of request.headers) {
-      if (!HOP_BY_HOP_HEADERS.includes(key.toLowerCase())) {
-        headers.set(key, value);
-      }
-    }
-
-    let body;
-    if (request.method !== 'GET' && request.method !== 'HEAD') {
-      body = request.body;
-    }
-
-    const response = await fetch(targetUrl.toString(), {
-      method: request.method,
-      headers,
-      body,
-      redirect: 'follow',
-    });
-
-    const responseHeaders = new Headers();
-    for (const key of FORWARD_RESPONSE_HEADERS) {
-      const value = response.headers.get(key);
-      if (value) responseHeaders.set(key, value);
-    }
-
-    const contentType = response.headers.get('content-type') || '';
-    if (contentType.includes('text/event-stream')) {
-      responseHeaders.set('Cache-Control', 'no-cache, no-transform');
-      responseHeaders.set('X-Accel-Buffering', 'no');
-    }
-
-    for (const [key, value] of Object.entries(CORS_HEADERS)) {
-      responseHeaders.set(key, value);
-    }
-    responseHeaders.delete('X-Frame-Options');
-    responseHeaders.delete('X-Content-Type-Options');
-    responseHeaders.delete('Content-Security-Policy');
-
-    return new Response(response.body, {
-      status: response.status,
-      statusText: response.statusText,
-      headers: responseHeaders,
-    });
-  } catch (error) {
-    console.error('Fish Audio proxy error:', error);
-    return new Response(JSON.stringify({ error: `代理请求失败: ${error.message}` }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
-    });
-  }
-};
-
-async function handleOpenAIConverter(request) {
-  const url = new URL(request.url);
-  let path = url.pathname.replace(/^\/fish-audio-api\/openai/, '') || '/';
-  if (path === '/' || path === '') path = '';
-  else if (!path.startsWith('/')) path = '/' + path;
-
-  const auth = request.headers.get('Authorization') || '';
+  const url = new URL(req.url);
+  const path = resolveOpenAIPath(url);
+  const auth = req.headers.get('Authorization') || '';
 
   try {
     if (path === '/v1/audio/speech' || path === '/audio/speech') {
-      return await handleOpenAITTS(request, auth);
+      return await handleTTS(req, auth);
     }
     if (path === '/v1/audio/transcriptions' || path === '/audio/transcriptions') {
-      return await handleOpenAISTT(request, auth);
+      return await handleSTT(req, auth);
     }
     return new Response(
       JSON.stringify({
@@ -157,10 +66,10 @@ async function handleOpenAIConverter(request) {
   }
 }
 
-async function handleOpenAITTS(request, auth) {
+async function handleTTS(req, auth) {
   let body;
   try {
-    body = await request.json();
+    body = await req.json();
   } catch (e) {
     return new Response(JSON.stringify({ error: '请求体必须是 JSON' }), {
       status: 400,
@@ -178,7 +87,7 @@ async function handleOpenAITTS(request, auth) {
   }
 
   const fishModel =
-    OPENAI_MODEL_MAP[model] ||
+    MODEL_MAP[model] ||
     (model && !model.startsWith('tts-') ? model : 's2.1-pro-free');
 
   const fishBody = {
@@ -224,10 +133,10 @@ async function handleOpenAITTS(request, auth) {
   });
 }
 
-async function handleOpenAISTT(request, auth) {
+async function handleSTT(req, auth) {
   let formData;
   try {
-    formData = await request.formData();
+    formData = await req.formData();
   } catch (e) {
     return new Response(JSON.stringify({ error: '请求体必须是 multipart/form-data' }), {
       status: 400,

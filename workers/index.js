@@ -4,6 +4,7 @@ import { handleImageRequest } from './handlers/image.js';
 import { handleGitHubDownload } from './handlers/github-download.js';
 import { handleGetBAAH } from './handlers/getbaah.js';
 import { handleFishAudio } from './handlers/fish-audio.js';
+import { handleFishAudioOpenAI } from './handlers/fish-audio-openai.js';
 
 export default {
   async fetch(request, env, ctx) {
@@ -22,6 +23,10 @@ export default {
           'Access-Control-Allow-Headers': 'Content-Type, Authorization',
         },
       });
+    }
+
+    if (pathname.startsWith('/fish-audio-api/openai')) {
+      return handleFishAudioOpenAI(request);
     }
 
     if (pathname.startsWith('/fish-audio-api')) {

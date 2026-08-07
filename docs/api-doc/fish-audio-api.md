@@ -316,6 +316,112 @@ const audioBuffer = await response.arrayBuffer();
 | 500 | 服务器错误 |
 | 503 | 服务繁忙，请稍后重试 |
 
+## OpenAI 兼容端点
+
+提供 OpenAI Audio API 规范的转换器，可直接使用 OpenAI SDK 或兼容 OpenAI 接口的客户端调用 Fish Audio。
+
+### 端点地址
+
+| OpenAI 端点 | 边缘节点路径 | 转换为 Fish Audio |
+|---|---|---|
+| `POST /v1/audio/speech` | `/fish-audio-api/openai/v1/audio/speech` | `POST /v1/tts` |
+| `POST /v1/audio/transcriptions` | `/fish-audio-api/openai/v1/audio/transcriptions` | `POST /v1/asr` |
+
+### 模型映射
+
+OpenAI 的 `model` 参数会自动映射到 Fish Audio 模型：
+
+| OpenAI model | Fish Audio model | 说明 |
+|---|---|---|
+| `tts-1` | `s2.1-pro-free` | 免费模型 |
+| `tts-1-hd` | `s2.1-pro` | 高清模型 |
+| `tts-1-free` | `s2.1-pro-free` | 免费模型 |
+| 其他（如 `s2.1-pro-free`） | 原样传递 | 直接使用 Fish Audio 模型名 |
+
+### 参数映射
+
+**TTS（`/v1/audio/speech`）**
+
+| OpenAI 参数 | Fish Audio 参数 | 说明 |
+|---|---|---|
+| `input` | `text` | 要合成的文本 |
+| `voice` | `reference_id` | 声音模型 ID（OpenAI 标准声音名如 `alloy`/`nova` 等会被忽略，使用 Fish Audio 默认声音） |
+| `response_format` | `format` | 输出格式（`mp3`/`wav`/`pcm`/`opus`） |
+| `speed` | `prosody_speed` | 语速倍率 |
+| `model` | 请求头 `model` | 模型选择（映射见上表） |
+
+**STT（`/v1/audio/transcriptions`）**
+
+| OpenAI 参数 | Fish Audio 参数 | 说明 |
+|---|---|---|
+| `file` | `audio` | 音频文件 |
+| `language` | `language` | 语言提示 |
+| `response_format` | — | 支持 `json`（默认）、`text`、`verbose_json` |
+
+### 使用示例
+
+**cURL（TTS）**
+
+```bash
+curl -X POST https://your-domain/fish-audio-api/openai/v1/audio/speech \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "tts-1",
+    "input": "你好，世界！这是 OpenAI 兼容端点测试。",
+    "voice": "alloy",
+    "response_format": "mp3"
+  }' --output speech.mp3
+```
+
+**Python（OpenAI SDK）**
+
+```python
+from openai import OpenAI
+
+client = OpenAI(
+    api_key="YOUR_API_KEY",
+    base_url="https://your-domain/fish-audio-api/openai/v1"
+)
+
+response = client.audio.speech.create(
+    model="tts-1",
+    voice="alloy",
+    input="你好，世界！"
+)
+response.stream_to_file("speech.mp3")
+```
+
+**使用 Fish Audio 声音模型**
+
+将 `voice` 设为 Fish Audio 的模型 ID 即可使用自定义声音：
+
+```python
+response = client.audio.speech.create(
+    model="tts-1",
+    voice="YOUR_FISH_AUDIO_MODEL_ID",
+    input="你好，世界！"
+)
+```
+
+**Node.js（OpenAI SDK）**
+
+```javascript
+import OpenAI from "openai";
+
+const openai = new OpenAI({
+  apiKey: "YOUR_API_KEY",
+  baseURL: "https://your-domain/fish-audio-api/openai/v1",
+});
+
+const mp3 = await openai.audio.speech.create({
+  model: "tts-1",
+  voice: "alloy",
+  input: "你好，世界！",
+});
+const buffer = await mp3.arrayBuffer();
+```
+
 ## 注意事项
 
 - WebSocket 实时流式端点 `/v1/tts/live` 暂不在代理支持范围内，请使用官方 SDK 或直连 `wss://api.fish.audio`。
