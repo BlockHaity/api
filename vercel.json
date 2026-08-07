@@ -50,6 +50,14 @@
     {
       "source": "/agnes-media/:path*",
       "destination": "/api/agnes-media?__path=:path*"
+    },
+    {
+      "source": "/fish-audio-api",
+      "destination": "/api/fish-audio"
+    },
+    {
+      "source": "/fish-audio-api/:path*",
+      "destination": "/api/fish-audio?__path=:path*"
     }
   ]
 }

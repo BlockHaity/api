@@ -6,3 +6,4 @@
   - [randomimg](/api-doc/randomimg)
   - [gh-download](/api-doc/gh-download)
   - [getbaah](/api-doc/getbaah)
+  - [fish-audio-api](/api-doc/fish-audio-api)
