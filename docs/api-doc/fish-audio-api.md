@@ -32,13 +32,13 @@ https://api-cloudflare.blockhaity.qzz.io/fish-audio-api
 | 边缘节点路径 | → Fish Audio API | 用途 |
 |---|---|---|
 | `POST /fish-audio-api/v1/tts` | `/v1/tts` | 文本转语音 |
-| `POST /fish-audio-api/v1/stt` | `/v1/stt` | 语音转文本 |
+| `POST /fish-audio-api/v1/asr` | `/v1/asr` | 语音转文本 |
 | `POST /fish-audio-api/v1/voice-design` | `/v1/voice-design` | 声音设计 |
-| `GET /fish-audio-api/v1/models` | `/v1/models` | 列出模型 |
-| `POST /fish-audio-api/v1/model` | `/v1/model` | 创建模型（声音克隆） |
-| `GET /fish-audio-api/v1/model/:id` | `/v1/model/:id` | 获取模型详情 |
-| `PUT /fish-audio-api/v1/model/:id` | `/v1/model/:id` | 更新模型 |
-| `DELETE /fish-audio-api/v1/model/:id` | `/v1/model/:id` | 删除模型 |
+| `GET /fish-audio-api/model` | `/model` | 列出模型 |
+| `POST /fish-audio-api/model` | `/model` | 创建模型（声音克隆） |
+| `GET /fish-audio-api/model/:id` | `/model/:id` | 获取模型详情 |
+| `PATCH /fish-audio-api/model/:id` | `/model/:id` | 更新模型 |
+| `DELETE /fish-audio-api/model/:id` | `/model/:id` | 删除模型 |
 
 ## 认证
 
@@ -62,14 +62,17 @@ Content-Type: application/json
 | `text` | string | 是 | 要合成的文本 |
 | `reference_id` | string / array | 否 | 声音模型 ID；多说话人时传 ID 数组 |
 | `references` | array | 否 | 零样本克隆的参考音频数组 |
-| `model` | string | 否 | 模型名称，如 `s2.1-pro`、`s2.1-pro-free`、`s2-pro`、`s1` |
-| `latency` | string | 否 | 延迟优化等级，如 `normal` |
-| `format` | string | 否 | 输出格式，如 `mp3`、`wav` |
-| `mp3_bitrate` | integer | 否 | MP3 比特率 |
-| `prosody_speed` | number | 否 | 语速倍率 |
+| `latency` | string | 否 | 延迟优化等级，如 `normal`、`balanced`（默认） |
+| `format` | string | 否 | 输出格式，如 `mp3`（默认）、`wav`、`pcm`、`opus` |
+| `mp3_bitrate` | integer | 否 | MP3 比特率，如 `64`、`128`、`192` |
+| `sample_rate` | integer | 否 | WAV 采样率，如 `44100` |
+| `prosody_speed` | number | 否 | 语速倍率（0.5–2.0） |
 | `prosody_volume` | number | 否 | 音量倍率 |
+| `chunk_length` | integer | 否 | 文本分块长度（100–300，默认 200） |
 | `normalize` | boolean | 否 | 是否对文本进行标准化 |
 | `trim` | boolean | 否 | 是否裁剪首尾静音 |
+
+> **模型选择**：通过请求头 `model: s2.1-pro-free` 指定，**不是请求体字段**。未指定时默认使用 `s2.1-pro`。
 
 **单说话人示例**
 
@@ -77,6 +80,7 @@ Content-Type: application/json
 curl -X POST https://your-domain/fish-audio-api/v1/tts \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
+  -H "model: s2.1-pro-free" \
   -d '{
     "text": "你好，世界！",
     "reference_id": "YOUR_MODEL_ID",
@@ -90,6 +94,7 @@ curl -X POST https://your-domain/fish-audio-api/v1/tts \
 curl -X POST https://your-domain/fish-audio-api/v1/tts \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
+  -H "model: s2.1-pro-free" \
   -d '{
     "text": "<|speaker:0|>早上好！<|speaker:1|>早上好！你今天怎么样？<|speaker:0|>我很好，谢谢！",
     "reference_id": ["MODEL_ID_ALICE", "MODEL_ID_BOB"],
@@ -99,9 +104,9 @@ curl -X POST https://your-domain/fish-audio-api/v1/tts \
 
 响应为音频流的二进制数据，`Content-Type` 与请求的 `format` 对应。
 
-## 语音转文本 (STT)
+## 语音转文本 (ASR)
 
-`POST /fish-audio-api/v1/stt`
+`POST /fish-audio-api/v1/asr`
 
 将音频文件转录为文本，支持自动语言检测。
 
@@ -116,7 +121,7 @@ curl -X POST https://your-domain/fish-audio-api/v1/tts \
 **请求示例**
 
 ```bash
-curl -X POST https://your-domain/fish-audio-api/v1/stt \
+curl -X POST https://your-domain/fish-audio-api/v1/asr \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -F "audio=@speech.mp3" \
   -F "language=zh"
@@ -179,21 +184,21 @@ curl -X POST https://your-domain/fish-audio-api/v1/voice-design \
 
 ### 列出模型
 
-`GET /fish-audio-api/v1/models`
+`GET /fish-audio-api/model`
 
 ```bash
-curl https://your-domain/fish-audio-api/v1/models \
+curl https://your-domain/fish-audio-api/model \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
 
 ### 创建模型（声音克隆）
 
-`POST /fish-audio-api/v1/model`
+`POST /fish-audio-api/model`
 
 通过上传参考音频创建自定义声音模型，请求体为 `multipart/form-data`。
 
 ```bash
-curl -X POST https://your-domain/fish-audio-api/v1/model \
+curl -X POST https://your-domain/fish-audio-api/model \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -F "title=My Voice Clone" \
   -F "description=Custom cloned voice" \
@@ -205,19 +210,19 @@ curl -X POST https://your-domain/fish-audio-api/v1/model \
 
 ### 获取模型详情
 
-`GET /fish-audio-api/v1/model/:id`
+`GET /fish-audio-api/model/:id`
 
 ```bash
-curl https://your-domain/fish-audio-api/v1/model/MODEL_ID \
+curl https://your-domain/fish-audio-api/model/MODEL_ID \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
 
 ### 更新模型
 
-`PUT /fish-audio-api/v1/model/:id`
+`PATCH /fish-audio-api/model/:id`
 
 ```bash
-curl -X PUT https://your-domain/fish-audio-api/v1/model/MODEL_ID \
+curl -X PATCH https://your-domain/fish-audio-api/model/MODEL_ID \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -229,10 +234,10 @@ curl -X PUT https://your-domain/fish-audio-api/v1/model/MODEL_ID \
 
 ### 删除模型
 
-`DELETE /fish-audio-api/v1/model/:id`
+`DELETE /fish-audio-api/model/:id`
 
 ```bash
-curl -X DELETE https://your-domain/fish-audio-api/v1/model/MODEL_ID \
+curl -X DELETE https://your-domain/fish-audio-api/model/MODEL_ID \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
 
@@ -241,9 +246,11 @@ curl -X DELETE https://your-domain/fish-audio-api/v1/model/MODEL_ID \
 | 模型 | 说明 |
 |---|---|
 | `s2.1-pro` | 推荐生产模型，质量、延迟、吞吐均优于 S2-Pro |
-| `s2.1-pro-free` | 免费版同款模型，适合测试与小型业务，无 TTFA/DPA 保证 |
+| `s2.1-pro-free` | **免费模型**，同款 S2.1-Pro 模型，适合测试、原型开发与小型业务，无 TTFA/DPA 保证 |
 | `s2-pro` | 上一代 S2 模型，支持多说话人与自然语言表达控制 |
 | `s1` | 上一代模型，支持括号情感标签 |
+
+> 测试与开发推荐使用 `s2.1-pro-free` 免费模型，无需 API 余额即可调用。
 
 ## 客户端集成
 
@@ -276,7 +283,8 @@ const response = await fetch("https://your-domain/fish-audio-api/v1/tts", {
   method: "POST",
   headers: {
     "Authorization": "Bearer YOUR_API_KEY",
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
+    "model": "s2.1-pro-free"
   },
   body: JSON.stringify({
     text: "你好，世界！",
