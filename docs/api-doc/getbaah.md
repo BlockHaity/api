@@ -2,13 +2,13 @@
 
 获取最新的[BAAH](https://github.com/BlueArchiveArisHelper/BAAH/)发行版，即程序本体
 
-[从Cloudflare节点下载(推荐，最快)](https://api-cloudflare.blockhaity.qzz.io/getbaah)
+[从Cloudflare节点下载(推荐，最快)](https://api-cloudflare.blockhaity.eu.org/getbaah)
 
 [从Netlify节点下载(推荐)](https://blockhaity-api.netlify.app/getbaah)
 
-[从Cloudflare-Vercel节点下载(备用)](https://api.blockhaity.qzz.io/getbaah)
+[从Cloudflare-Vercel节点下载(备用)](https://api.blockhaity.eu.org/getbaah)
 
-[从Vercel节点下载(备用)](https://api-vercel.blockhaity.dpdns.org/getbaah)
+[从Vercel节点下载(备用)](https://api-vercel.blockhaity.eu.org/getbaah)
 
 ## 使用方法
 
@@ -16,32 +16,32 @@
 #### **Cloudflare-Vercel节点**
 
 ```
-https://api.blockhaity.qzz.io/getbaah
+https://api.blockhaity.eu.org/getbaah
 ```
 
 文件相关数据(指定?json=true获取)
 
-<iframe src="https://api.blockhaity.qzz.io/getbaah?json=true" width="500" height="300">https://api.blockhaity.qzz.io/getbaah?json=true</iframe>
+<iframe src="https://api.blockhaity.eu.org/getbaah?json=true" width="500" height="300">https://api.blockhaity.eu.org/getbaah?json=true</iframe>
 
 #### **Cloudflare节点**
 
 ```
-https://api-cloudflare.blockhaity.qzz.io/getbaah
+https://api-cloudflare.blockhaity.eu.org/getbaah
 ```
 
 文件相关数据(指定?json=true获取)
 
-<iframe src="https://api-cloudflare.blockhaity.qzz.io/getbaah?json=true" width="500" height="300">https://api-cloudflare.blockhaity.qzz.io/getbaah?json=true</iframe>
+<iframe src="https://api-cloudflare.blockhaity.eu.org/getbaah?json=true" width="500" height="300">https://api-cloudflare.blockhaity.eu.org/getbaah?json=true</iframe>
 
 #### **Vercel节点**
 
 ```
-https://api-vercel.blockhaity.dpdns.org/getbaah
+https://api-vercel.blockhaity.eu.org/getbaah
 ```
 
 文件相关数据(指定?json=true获取)
 
-<iframe src="https://api-vercel.blockhaity.dpdns.org/getbaah?json=true" width="500" height="300">https://api-vercel.blockhaity.dpdns.org/getbaah?json=true</iframe>
+<iframe src="https://api-vercel.blockhaity.eu.org/getbaah?json=true" width="500" height="300">https://api-vercel.blockhaity.eu.org/getbaah?json=true</iframe>
 
 #### **Netlify节点**
 

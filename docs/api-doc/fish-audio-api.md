@@ -8,7 +8,7 @@
 #### **Vercel 节点**
 
 ```
-https://api-vercel.blockhaity.dpdns.org/fish-audio-api
+https://api-vercel.blockhaity.eu.org/fish-audio-api
 ```
 
 #### **Netlify 节点**
@@ -20,7 +20,7 @@ https://blockhaity-api.netlify.app/fish-audio-api
 #### **Cloudflare 节点**
 
 ```
-https://api-cloudflare.blockhaity.qzz.io/fish-audio-api
+https://api-cloudflare.blockhaity.eu.org/fish-audio-api
 ```
 
 <!-- tabs:end -->

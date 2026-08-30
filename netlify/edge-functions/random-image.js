@@ -111,7 +111,7 @@ async function handleImageRequest(request) {
 
     if (!useSource) {
       imageUrl = imageUrl.replace(
-        'api-vercel.blockhaity.dpdns.org',
+        'api-vercel.blockhaity.eu.org',
         'blockhaity-api.netlify.app',
       );
     }

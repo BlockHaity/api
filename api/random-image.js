@@ -7,7 +7,7 @@ const CATEGORY_CONFIG = {
   'miku': 'miku.json',
 };
 
-const BASE_JSON_URL = 'https://api-vercel.blockhaity.dpdns.org/img/';
+const BASE_JSON_URL = 'https://api-vercel.blockhaity.eu.org/img/';
 
 function errorResponse(message, status = 400) {
   return new Response(JSON.stringify({ error: message }), {

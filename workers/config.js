@@ -3,9 +3,9 @@ export const CATEGORY_CONFIG = {
   'miku': 'miku.json',
 };
 
-export const BASE_JSON_URL = 'https://api-vercel.blockhaity.dpdns.org/img/';
+export const BASE_JSON_URL = 'https://api-vercel.blockhaity.eu.org/img/';
 
-export const REDIRECT_TARGET = 'https://api.blockhaity.qzz.io';
+export const REDIRECT_TARGET = 'https://api.blockhaity.eu.org';
 
 export const GITHUB_PROXY_DOMAINS = [
   'github.com',
@@ -17,7 +17,7 @@ export const GITHUB_PROXY_DOMAINS = [
 
 export const GITHUB_REPO = 'BlueArchiveArisHelper/BAAH';
 export const GITHUB_API_URL = `https://api.github.com/repos/${GITHUB_REPO}/releases`;
-export const BACKUP_API_URL = 'https://api-vercel.blockhaity.dpdns.org/cache/baah.json';
+export const BACKUP_API_URL = 'https://api-vercel.blockhaity.eu.org/cache/baah.json';
 
 export const CACHE_TTL = 86400;
 

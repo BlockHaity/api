@@ -8,7 +8,7 @@
 #### **Vercel 节点**
 
 ```
-https://api-vercel.blockhaity.dpdns.org/agnes-api
+https://api-vercel.blockhaity.eu.org/agnes-api
 ```
 
 #### **Netlify 节点**

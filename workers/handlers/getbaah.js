@@ -76,7 +76,7 @@ export async function handleGetBAAH(request) {
     let currentDomain = new URL(request.url).origin;
 
     if (currentDomain === 'https://api-cloudflare.blockhaity.dpdns.org') {
-      currentDomain = 'https://api-cloudflare.blockhaity.qzz.io';
+      currentDomain = 'https://api-cloudflare.blockhaity.eu.org';
     }
 
     const downloadUrl =

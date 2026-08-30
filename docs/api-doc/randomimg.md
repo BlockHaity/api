@@ -10,24 +10,24 @@
 #### **Cloudflare-Vercel节点**
 
 ```
-https://api.blockhaity.qzz.io/images
+https://api.blockhaity.eu.org/images
 ```
 
 #### **Cloudflare节点**
 
 ```
-https://api-cloudflare.blockhaity.qzz.io/images
+https://api-cloudflare.blockhaity.eu.org/images
 ```
 
-![请求内容](https://api-cloudflare.blockhaity.qzz.io/images)
+![请求内容](https://api-cloudflare.blockhaity.eu.org/images)
 
 #### **Vercel节点**
 
 ```
-https://api-vercel.blockhaity.dpdns.org/images
+https://api-vercel.blockhaity.eu.org/images
 ```
 
-![请求内容](https://api-vercel.blockhaity.dpdns.org/images)
+![请求内容](https://api-vercel.blockhaity.eu.org/images)
 
 #### **Netlify节点**
 

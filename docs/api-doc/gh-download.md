@@ -8,19 +8,19 @@
 #### **Cloudflare-Vercel节点**
 
 ```
-https://api.blockhaity.qzz.io/gh-download?url=<github链接>
+https://api.blockhaity.eu.org/gh-download?url=<github链接>
 ```
 
 #### **Cloudflare节点**
 
 ```
-https://api-cloudflare.blockhaity.qzz.io/gh-download?url=<github链接>
+https://api-cloudflare.blockhaity.eu.org/gh-download?url=<github链接>
 ```
 
 #### **Vercel节点**
 
 ```
-https://api-vercel.blockhaity.dpdns.org/gh-download?url=<github链接>
+https://api-vercel.blockhaity.eu.org/gh-download?url=<github链接>
 ```
 
 #### **Netlify节点**

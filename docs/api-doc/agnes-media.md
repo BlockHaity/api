@@ -8,7 +8,7 @@
 #### **Vercel 节点**
 
 ```
-https://api-vercel.blockhaity.dpdns.org/agnes-media
+https://api-vercel.blockhaity.eu.org/agnes-media
 ```
 
 #### **Netlify 节点**

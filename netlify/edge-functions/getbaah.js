@@ -14,7 +14,7 @@ export default async function handler(request, context) {
             releases = await response.json();
         } catch (error) {
             console.log('GitHub API访问失败，切换到备用API');
-            const backupResponse = await fetch('https://api-vercel.blockhaity.dpdns.org/cache/baah.json');
+            const backupResponse = await fetch('https://api-vercel.blockhaity.eu.org/cache/baah.json');
             releases = await backupResponse.json();
         }
 
@@ -63,7 +63,7 @@ export default async function handler(request, context) {
         const selectedAsset = firstRelease.assets[assetIndex];
         let currentDomain = new URL(request.url).origin;
         if (currentDomain === "https://api.blockhaity.dpdns.org") {
-            currentDomain = "https://api.blockhaity.qzz.io";
+            currentDomain = "https://api.blockhaity.eu.org";
         }
         const downloadUrl = currentDomain + "/gh-download?url=" + selectedAsset.browser_download_url;
 

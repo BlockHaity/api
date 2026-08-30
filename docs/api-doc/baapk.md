@@ -10,8 +10,8 @@
 #### **CloudFlare-Vercel节点**
 | 区服   | 请求地址                                      |
 | ------ | --------------------------------------------- |
-| jp     | https://api.blockhaity.qzz.io/baapk/jp     |
-| global | https://api.blockhaity.qzz.io/baapk/global |
+| jp     | https://api.blockhaity.eu.org/baapk/jp     |
+| global | https://api.blockhaity.eu.org/baapk/global |
 
 #### **Netlify节点**
 | 区服   | 请求地址                                        |
@@ -22,17 +22,17 @@
 #### **Vercel节点**
 | 区服   | 请求地址                                      |
 | ------ | --------------------------------------------- |
-| jp     | https://api-vercel.blockhaity.dpdns.org/baapk/jp     |
-| global | https://api-vercel.blockhaity.dpdns.org/baapk/global |
+| jp     | https://api-vercel.blockhaity.eu.org/baapk/jp     |
+| global | https://api-vercel.blockhaity.eu.org/baapk/global |
 <!-- tabs:end -->
 
 当然，你可以通过直接获取json数据文件来获取url，此json文件每隔2小时更新
 
 <!-- tabs:start -->
 #### **CloudFlare-Vercel节点**
-请求地址：https://api.blockhaity.qzz.io/api/baapk.json 或 https://api.blockhaity.qzz.io/baapk.json
+请求地址：https://api.blockhaity.eu.org/api/baapk.json 或 https://api.blockhaity.eu.org/baapk.json
 
-<iframe src="https://api.blockhaity.qzz.io/api/baapk.json" width="500" height="300"></iframe>
+<iframe src="https://api.blockhaity.eu.org/api/baapk.json" width="500" height="300"></iframe>
 
 #### **Netlify节点**
 请求地址：https://blockhaity-api.netlify.app/api/baapk.json 或 https://blockhaity-api.netlify.app/baapk.json
@@ -40,8 +40,8 @@
 <iframe src="https://blockhaity-api.netlify.app/api/baapk.json" width="500" height="300"></iframe>
 
 #### **Vercel节点**
-请求地址：https://api-vercel.blockhaity.dpdns.org/api/baapk.json 或 https://api-vercel.blockhaity.dpdns.org/baapk.json
+请求地址：https://api-vercel.blockhaity.eu.org/api/baapk.json 或 https://api-vercel.blockhaity.eu.org/baapk.json
 
-<iframe src="https://api-vercel.blockhaity.dpdns.org/api/baapk.json" width="500" height="300"></iframe>
+<iframe src="https://api-vercel.blockhaity.eu.org/api/baapk.json" width="500" height="300"></iframe>
 <!-- tabs:end -->
 
