@@ -68,7 +68,7 @@
                 "state": "uploaded",
                 "size": 172872241,
                 "digest": "sha256:ac75137be97e6d418caeda2bb53a079b49d93a5bfe74d7e6100274cf7a63a14b",
-                "download_count": 40,
+                "download_count": 41,
                 "created_at": "2026-08-30T04:52:16Z",
                 "updated_at": "2026-08-30T04:52:22Z",
                 "browser_download_url": "https://github.com/BlueArchiveArisHelper/BAAH/releases/download/BAAH2.4.7/BAAH2.4.7.zip"
