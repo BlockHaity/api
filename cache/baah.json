@@ -104,7 +104,7 @@
                 "state": "uploaded",
                 "size": 16259903,
                 "digest": "sha256:845cc6e017fe72f60b668503dd49aa8187b5350595ec814e3ee95321dc8636bd",
-                "download_count": 5,
+                "download_count": 7,
                 "created_at": "2026-09-06T13:10:15Z",
                 "updated_at": "2026-09-06T13:10:16Z",
                 "browser_download_url": "https://github.com/BlueArchiveArisHelper/BAAH/releases/download/BAAH2.4.13/BAAH2.4.13_update.zip"
