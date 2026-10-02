@@ -1,36 +1,76 @@
 import { CATEGORY_CONFIG, BASE_JSON_URL, GITHUB_RAW_BASE, CACHE_TTL } from '../config.js';
 import { errorResponse, getRandomItem } from '../utils.js';
 
-async function fetchCategoryData(category) {
+function localPathname(localUrl) {
+  try {
+    return new URL(localUrl).pathname;
+  } catch {
+    return localUrl.startsWith('/') ? localUrl : `/${localUrl}`;
+  }
+}
+
+// 静态资源目录根即 img/，因此 ASSETS 路径需去掉 /img 前缀
+function toAssetPath(pathname) {
+  return pathname.replace(/^\/img/, '') || '/';
+}
+
+// 优先从当前访问域名的 /img 下获取列表：先走静态资源绑定，再走 HTTP，最后回退规范域名
+async function fetchCategoryData(category, currentOrigin, env) {
   const fileName = CATEGORY_CONFIG[category];
   if (!fileName) {
     throw new Error(`分类 ${category} 不存在`);
   }
 
-  const jsonUrl = `${BASE_JSON_URL}${fileName}`;
+  const candidates = [];
 
-  try {
-    const response = await fetch(jsonUrl);
+  if (env && env.ASSETS) {
+    candidates.push(async () => {
+      const response = await env.ASSETS.fetch(
+        new Request(`${currentOrigin}${toAssetPath(`/img/${fileName}`)}`),
+      );
+      if (!response.ok) {
+        throw new Error(`HTTP错误! 状态: ${response.status}`);
+      }
+      return response;
+    });
+  }
 
+  candidates.push(async () => {
+    const response = await fetch(`${currentOrigin}/img/${fileName}`);
     if (!response.ok) {
       throw new Error(`HTTP错误! 状态: ${response.status}`);
     }
+    return response;
+  });
 
-    const data = await response.json();
-
-    if (!Array.isArray(data)) {
-      throw new Error('返回的数据不是数组');
+  candidates.push(async () => {
+    const response = await fetch(`${BASE_JSON_URL}${fileName}`);
+    if (!response.ok) {
+      throw new Error(`HTTP错误! 状态: ${response.status}`);
     }
+    return response;
+  });
 
-    return data;
-  } catch (error) {
-    throw new Error(`获取分类 ${category} 数据失败: ${error.message}`);
+  let lastError;
+  for (const getCandidate of candidates) {
+    try {
+      const response = await getCandidate();
+      const data = await response.json();
+      if (!Array.isArray(data)) {
+        throw new Error('返回的数据不是数组');
+      }
+      return data;
+    } catch (error) {
+      lastError = error;
+    }
   }
+
+  throw new Error(`获取分类 ${category} 数据失败: ${lastError.message}`);
 }
 
-async function fetchAllCategoriesData() {
+async function fetchAllCategoriesData(currentOrigin, env) {
   const categories = Object.keys(CATEGORY_CONFIG);
-  const allPromises = categories.map((category) => fetchCategoryData(category));
+  const allPromises = categories.map((category) => fetchCategoryData(category, currentOrigin, env));
 
   try {
     const results = await Promise.allSettled(allPromises);
@@ -54,17 +94,43 @@ async function fetchAllCategoriesData() {
   }
 }
 
-function localToGithubRaw(localUrl) {
-  try {
-    const url = new URL(localUrl);
-    return `${GITHUB_RAW_BASE}${url.pathname}`;
-  } catch {
-    return `${GITHUB_RAW_BASE}${localUrl}`;
+// 优先从当前访问域名的 /img 下获取图片，失败时回退到 GitHub Raw
+async function fetchLocalImage(localUrl, currentOrigin, env) {
+  const pathname = localPathname(localUrl);
+
+  if (env && env.ASSETS) {
+    try {
+      const response = await env.ASSETS.fetch(
+        new Request(`${currentOrigin}${toAssetPath(pathname)}`),
+      );
+      if (response.ok) {
+        return response;
+      }
+    } catch {
+      // 继续回退
+    }
+  } else {
+    try {
+      const response = await fetch(`${currentOrigin}${pathname}`);
+      if (response.ok) {
+        return response;
+      }
+    } catch {
+      // 继续回退
+    }
   }
+
+  return fetch(`${GITHUB_RAW_BASE}${pathname}`, {
+    cf: {
+      cacheTtl: CACHE_TTL,
+      cacheEverything: true,
+    },
+  });
 }
 
-export async function handleImageRequest(request) {
+export async function handleImageRequest(request, env) {
   const url = new URL(request.url);
+  const currentOrigin = url.origin;
 
   const category = url.searchParams.get('category') || 'all';
   const color = url.searchParams.get('color');
@@ -73,9 +139,9 @@ export async function handleImageRequest(request) {
     let data;
 
     if (category === 'all') {
-      data = await fetchAllCategoriesData();
+      data = await fetchAllCategoriesData(currentOrigin, env);
     } else if (CATEGORY_CONFIG[category]) {
-      data = await fetchCategoryData(category);
+      data = await fetchCategoryData(category, currentOrigin, env);
     } else {
       return errorResponse(`分类 ${category} 不存在`, 404);
     }
@@ -94,18 +160,23 @@ export async function handleImageRequest(request) {
     const randomItem = getRandomItem(data);
 
     const useSource = url.searchParams.get('source') === 'true';
-    const imageUrl = useSource ? randomItem.source : localToGithubRaw(randomItem.local);
-
-    if (!imageUrl) {
-      return errorResponse('图片URL不存在', 404);
+    let imageResponse;
+    if (useSource) {
+      if (!randomItem.source) {
+        return errorResponse('图片URL不存在', 404);
+      }
+      imageResponse = await fetch(randomItem.source, {
+        cf: {
+          cacheTtl: CACHE_TTL,
+          cacheEverything: true,
+        },
+      });
+    } else {
+      if (!randomItem.local) {
+        return errorResponse('图片URL不存在', 404);
+      }
+      imageResponse = await fetchLocalImage(randomItem.local, currentOrigin, env);
     }
-
-    const imageResponse = await fetch(imageUrl, {
-      cf: {
-        cacheTtl: CACHE_TTL,
-        cacheEverything: true,
-      },
-    });
 
     if (!imageResponse.ok) {
       return errorResponse('无法获取图片', 500);

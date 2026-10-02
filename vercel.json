@@ -36,22 +36,6 @@
       "destination": "/api/getbaah"
     },
     {
-      "source": "/agnes-api",
-      "destination": "/api/agnes-api"
-    },
-    {
-      "source": "/agnes-api/:path*",
-      "destination": "/api/agnes-api?__path=:path*"
-    },
-    {
-      "source": "/agnes-media",
-      "destination": "/api/agnes-media"
-    },
-    {
-      "source": "/agnes-media/:path*",
-      "destination": "/api/agnes-media?__path=:path*"
-    },
-    {
       "source": "/fish-audio-api/openai",
       "destination": "/api/fish-audio-openai"
     },

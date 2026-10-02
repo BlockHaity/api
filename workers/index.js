@@ -11,8 +11,26 @@ export default {
     const url = new URL(request.url);
     const pathname = url.pathname;
 
+    // CF 反代优选：4 级域名包含 -source 标记时，删除该标记后重定向
+    const hostLabels = url.hostname.split('.');
+    if (hostLabels.length === 4 && hostLabels[0].includes('-source')) {
+      hostLabels[0] = hostLabels[0].replace('-source', '');
+      url.hostname = hostLabels.join('.');
+      return Response.redirect(url.toString(), 302);
+    }
+
     if (pathname === '/') {
       return Response.redirect(REDIRECT_TARGET, 302);
+    }
+
+    // 将 /img/* 映射到静态资源（资源根目录即 img/，需去掉 /img 前缀）
+    if (pathname.startsWith('/img/') && env.ASSETS) {
+      const assetResponse = await env.ASSETS.fetch(
+        new Request(new URL(pathname.slice(4), request.url)),
+      );
+      if (assetResponse.status !== 404) {
+        return assetResponse;
+      }
     }
 
     if (request.method === 'OPTIONS') {
@@ -46,7 +64,7 @@ export default {
     }
 
     if (pathname.startsWith('/images')) {
-      return handleImageRequest(request);
+      return handleImageRequest(request, env);
     }
 
     return errorResponse('路径不存在', 404);
